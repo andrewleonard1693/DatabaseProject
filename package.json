@@ -1,0 +1,19 @@
+{
+  "name": "databaseproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewleonard1693/DatabaseProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrewleonard1693/DatabaseProject/issues"
+  },
+  "homepage": "https://github.com/andrewleonard1693/DatabaseProject#readme"
+}
