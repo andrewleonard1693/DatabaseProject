@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/andrewleonard1693/DatabaseProject/issues"
   },
-  "homepage": "https://github.com/andrewleonard1693/DatabaseProject#readme"
+  "homepage": "https://github.com/andrewleonard1693/DatabaseProject#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+  }
 }
