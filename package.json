@@ -18,6 +18,8 @@
   "homepage": "https://github.com/andrewleonard1693/DatabaseProject#readme",
   "dependencies": {
     "express": "^4.16.2",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "passport": "^0.4.0",
+    "socketio": "^1.0.0"
   }
 }
