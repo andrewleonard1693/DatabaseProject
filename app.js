@@ -22,7 +22,7 @@ connection.connect(function(err) {
 });
 
 app.get('/', function (req, res) {
-  res.send('Eat ass jack!')
+  res.send('Eat ass jack')
 })
 
 app.listen(8080, function () {
