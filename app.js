@@ -33,7 +33,7 @@ app.use(express.static('public'));
 //route for homepage
 app.get('/', function (req, res) {
   res.render('homepage');
-}
+});
 //node app is listening on port
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
