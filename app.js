@@ -23,12 +23,17 @@ connection.connect(function(err) {
  
   console.log('connected as id ' + connection.threadId);
 });
+//set the view engine to ejs
+app.set('view engine','ejs');
+
+//allow the express app to render the static files in the public folder
+app.use(express.static('public'));
 
 
 //route for homepage
 app.get('/', function (req, res) {
-  res.send('Webpage here')
-})
+  res.render('homepage');
+}
 //node app is listening on port
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
