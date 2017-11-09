@@ -3,6 +3,7 @@
 // node package declarations
 var mysql      	= 	require('mysql'),
 	socket		= 	require('socketio'),
+	bodyParser	=	require('body-parser'),
 	express		=	require('express'),
 	app			=	express();
 
@@ -28,7 +29,7 @@ connection.connect(function(err) {
 app.get('/', function (req, res) {
   res.send('Eat ass jack')
 })
-//node app is listening on port 8080
+//node app is listening on port
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 })
