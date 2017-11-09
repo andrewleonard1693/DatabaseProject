@@ -27,7 +27,7 @@ connection.connect(function(err) {
 
 //route for homepage
 app.get('/', function (req, res) {
-  res.send('Eat ass jack')
+  res.send('Webpage here')
 })
 //node app is listening on port
 app.listen(8080, function () {
