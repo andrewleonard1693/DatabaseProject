@@ -2,7 +2,7 @@
 
 // node package declarations
 var mysql      	= 	require('mysql'),
-	socket		= 	require('socketio'),
+  socket		= 	require('socketio'),
 	bodyParser	=	require('body-parser'),
 	express		=	require('express'),
 	app			=	express();
