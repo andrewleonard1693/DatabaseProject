@@ -1,0 +1,33 @@
+@font-face { 
+    font-family: Variane-Script; 
+    src: url('../assets/Variane_Script.ttf'); 
+}
+
+body{
+    background-image: url('../assets/dark_homepage_background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.navbar-default {
+    background:transparent;
+    border-color: transparent;
+}
+#welcome{
+    color: white;
+    opacity: 0.8;
+}
+span{
+    font-family: Variane-Script;
+    font-size: 1.5em;
+}
+h1{
+    font-family: 'Roboto', sans-serif;
+
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
