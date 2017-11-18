@@ -1,8 +1,10 @@
+
+/* import font used for logo and swervy hotels */
 @font-face { 
     font-family: Variane-Script; 
     src: url('../assets/Variane_Script.ttf'); 
 }
-
+/* sets the background image of the landing page */
 body{
     background-image: url('../assets/dark_homepage_background.jpg');
     -webkit-background-size: cover;
@@ -10,12 +12,13 @@ body{
     -o-background-size: cover;
     background-size: cover;
 }
-
+/* makes the navbar for the landing page transparent  */
 .navbar-default {
     background:transparent;
     border-color: transparent;
     /* color: white; */
 }
+/* styling for the welcome text */
 .welcome{
     color: white;
     opacity: 0.8;
@@ -29,25 +32,31 @@ body{
     font-size: 2.5em;
     font-family: Variane-Script;
 }
+/* allows us to vertically align any container */
 .vertical-align{
     position: relative;
     top: 40%;
     transform: translateY(-50%);
 }
+
 h1{
     font-family: 'Roboto', sans-serif;
 }
+/* allows us to horizontally center any column using bootstraps grid system */
 .col-centered{
     float: none;
     margin: 0 auto;
 }
+/* changes the color of the nav brand link and sets its transition timing for when it chages to green on hover  */
 nav a {
     color: white;
     transition: 0.25s;
 }
+/* changes the nav brand logo to green on hover */
 nav a:hover{
     color:#5CB85C; 
 }
+/* increase the spacing between the sign in and register buttons */
 .btn-space{
     margin-left:10px;
 }
