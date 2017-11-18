@@ -14,20 +14,39 @@ body{
 .navbar-default {
     background:transparent;
     border-color: transparent;
+    /* color: white; */
 }
-#welcome{
+.welcome{
     color: white;
     opacity: 0.8;
 }
-span{
+.variane{
     font-family: Variane-Script;
     font-size: 1.5em;
 }
+#brand-variane{
+    font-size: 2.5em;
+    font-family: Variane-Script;
+}
+.vertical-align{
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
 h1{
     font-family: 'Roboto', sans-serif;
-
 }
 .col-centered{
     float: none;
     margin: 0 auto;
+}
+nav a {
+    color: white;
+    transition: 0.25s;
+}
+nav a:hover{
+    color:#5CB85C; 
+}
+.btn-space{
+    margin-left:10px;
 }
