@@ -1,0 +1,7 @@
+Todo:
+1.	User has ability to register/sign in 
+2.	Once user signs in, redirect to their profile page
+3.	Search bar for hotels underneath welcome text on landing page
+4.	Sidebar for user reservations, reviews written, credit card information?
+5.	User has ability to reserve hotel with check in/check out date
+6.	User has ability to write review about a stay at a hotel
