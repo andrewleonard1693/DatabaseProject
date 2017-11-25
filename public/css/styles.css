@@ -138,10 +138,10 @@ nav a:hover{
   #modal-custom .iziModal-content section button{
       background: #5CB85C;
       color: white;
-      margin: 0;
+      margin: 1%;
       border: 0;
       cursor: pointer;
-      width: 50%;
+      width: 47%;
       float: left;
   }
   #modal-custom .iziModal-content section button:hover{
@@ -172,6 +172,17 @@ nav a:hover{
   }
   #modal-custom .iziModal-content .icon-close:hover, #modal-custom .iziModal-content .icon-close:focus{
     color: black;
+  }
+
+  input{
+      border: 2px solid #eee;
+      -moz-transition: all .5s;
+      -webkit-transition: all .5s;
+      transition: all .5s;
+  }
+  input:focus{
+    border: 2px solid #5CB85C;
+    outline:0;
   }
   
   
