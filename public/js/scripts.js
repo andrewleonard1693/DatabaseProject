@@ -44,6 +44,9 @@ $(function(){
                 }, 1500);
             }
         }else{
+            //todo: check if the user's information is stored in the db
+            //if it is redirect to their profile page
+            //if not then alert them that they need to register as a new user
             console.log("the login fields werent empty!");
         }
       }); 
@@ -65,6 +68,10 @@ $(function(){
                     }, 1500);
                 }
             }else{
+                //todo: check if the user is already registered
+                //if they are then alert them
+                //if not then continue with creating and storing their info in the database
+                //redirect them to their new profile page
                 console.log("the fields were not empty!");
             }
       }); 

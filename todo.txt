@@ -1,5 +1,6 @@
 Todo:
 1.	User has ability to register/sign in 
+    a. Perform checks against the database when a user attempts to login/register
 2.	Once user signs in, redirect to their profile page
 3.	Search bar for hotels underneath welcome text on landing page
 4.	Sidebar for user reservations, reviews written, credit card information?
