@@ -1,4 +1,8 @@
 console.log("Successfully connected");
+//reload the window when the brand logo is clicked
+$("#brand-variane").click(function(){
+    window.location.reload();
+});
 
 $(function(){
     
