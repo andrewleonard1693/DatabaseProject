@@ -27,36 +27,46 @@ $(function(){
               $("#modal-custom .iziModal-content .icon-close").attr('style', '');
           }
       });
-    //   
+    //  login button clicked 
       $("#modal-custom").on('click', '#loginButton', function(event) {
           event.preventDefault();
         console.log("login button clicked");
-
-
-
-        //   var fx = "wobble",  //wobble shake
-        //       $modal = $(this).closest('.iziModal');
-    
-        //   if( !$modal.hasClass(fx) ){
-        //       $modal.addClass(fx);
-        //       setTimeout(function(){
-        //           $modal.removeClass(fx);
-        //       }, 1500);
-        //   }
+        var loginName = document.getElementById('loginUsername');
+        console.log(loginName.value); 
+        var loginPswd = document.getElementById('loginPassword'); 
+        if(loginName.value.length===0||loginPswd.value.length===0){
+            var fx = "wobble",  //wobble shake
+            $modal = $(this).closest('.iziModal');
+            if( !$modal.hasClass(fx) ){
+                $modal.addClass(fx);
+                setTimeout(function(){
+                    $modal.removeClass(fx);
+                }, 1500);
+            }
+        }else{
+            console.log("the login fields werent empty!");
+        }
       }); 
+      //create user button clicked
       $("#modal-custom").on('click', '#createAccountButton', function(event) {
           event.preventDefault();
           console.log("create account button clicked");
-    
-        //   var fx = "wobble",  //wobble shake
-        //       $modal = $(this).closest('.iziModal');
-    
-        //   if( !$modal.hasClass(fx) ){
-        //       $modal.addClass(fx);
-        //       setTimeout(function(){
-        //           $modal.removeClass(fx);
-        //       }, 1500);
-        //   }
+            //grab the contents of the input
+            var accName = document.getElementById('createAccountUsername');
+            var accPswd = document.getElementById('createAccountPassword');
+            var accEmail = document.getElementById('createAccountEmail');
+            if(accName.value.length===0||accPswd.value.length===0||accEmail.value.length===0){
+                var fx = "wobble",  //wobble shake
+                $modal = $(this).closest('.iziModal');
+                if( !$modal.hasClass(fx) ){
+                    $modal.addClass(fx);
+                    setTimeout(function(){
+                        $modal.removeClass(fx);
+                    }, 1500);
+                }
+            }else{
+                console.log("the fields were not empty!");
+            }
       }); 
       
     })
