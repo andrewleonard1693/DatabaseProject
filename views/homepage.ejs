@@ -46,26 +46,28 @@
 					<a href="" class="active">New Account</a>
 			</header>
 			<section class="hide">
-				<form method="POST" action="/login">
+				<form action="/login" method="POST" id="loginForm">
 					<input id="loginUsername" type="text" name="loginUsername" placeholder="Username">
 					<input id="loginPassword" type="password" name="loginPassword" placeholder="Password">
 					<footer>
 							<button data-iziModal-close>Cancel</button>
-							<button class="submit" id="loginButton" name="loginSubmit" type="submit">Log in</button>            
+							<button type="submit" class="submit" id="loginButton" name="loginSubmit">Log in</button>            
 					</footer>
 				</form>
 			</section>
+			<!-- <form action="/" method="post"> -->
 			<section>
-				<form method="POST" action="/register">
+				<form action="/register" method="post" id="registerForm">
 					<input id="createAccountUsername" type="text" name="createAccountUsername" placeholder="Username">
 					<input id="createAccountEmail" type="email" name="createAccountEmail" placeholder="Email">
 					<input id="createAccountPassword" type="password" name="createAccountPassword" placeholder="Password">
 					<footer>
 							<button data-iziModal-close>Cancel</button>
-							<button class="submit" id="createAccountButton" name="createAccountSubmit" type="submit">Create Account</button>            
+							<button type="submit" class="submit" id="createAccountButton" value="Submit">Create Account</button>            
 					</footer>
 				</form>
 				</section>
+			</form>
 	</div>
 <!-- end modal code -->
 	<!-- jquery and bootstrap cdns -->
