@@ -48,7 +48,7 @@ $(function(){
                 }, 1500);
             }
         }else{
-            //send the post request
+            //submit the form which activated the post request for the backend
             $('#loginForm').submit();
             //todo: check if the user's information is stored in the db
             //if it is redirect to their profile page
@@ -59,11 +59,12 @@ $(function(){
       //create user button clicked
       $("#modal-custom").on('click', '#createAccountButton', function(event) {
           event.preventDefault();
-          console.log("create account button clicked");
             //grab the contents of the input
             var accName = document.getElementById('createAccountUsername');
             var accPswd = document.getElementById('createAccountPassword');
             var accEmail = document.getElementById('createAccountEmail');
+
+            //check if the user hasnt added values to all of the input fields 
             if(accName.value.length===0||accPswd.value.length===0||accEmail.value.length===0){
                 var fx = "wobble",  //wobble shake
                 $modal = $(this).closest('.iziModal');

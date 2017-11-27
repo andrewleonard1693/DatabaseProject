@@ -37,24 +37,28 @@ app.use(express.static('public'));
 
 //route for homepage
 app.get('/', function (req, res) {
+  //render the homepage template
   res.render('homepage');
 });
-// app.post('/',function(req,res){
-//   console.log("testing");
-// });
-app.post('/', function(req,res){
-  console.log("test");
-})
-//route for post request for login/registration
+//This route is activated when the user clicks the create account button
 app.post('/register',function(req,res){
   console.log("hello");
+  var username = req.body.username,
+      password = req.body.password,
+      email    = req.body.email;
+  //req.body holds json formatted information from the input text field that the user has submitted
+  //we can parse req.body to grab the inputted info and check the infor agains the database
   console.log(req.body);
 });
+//This route is activated when the user clicks to login
 app.post('/login',function(req,res){
   console.log("login");
+  var username = req.body.username,
+      password = req.body.password;
   console.log(req.body);
 })
-//node app is listening on port
+
+//Starts up the node server listening on port 8080
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
 })
