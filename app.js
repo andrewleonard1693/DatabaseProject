@@ -43,9 +43,9 @@ app.get('/', function (req, res) {
 //This route is activated when the user clicks the create account button
 app.post('/register',function(req,res){
   console.log("hello");
-  var username = req.body.username,
-      password = req.body.password,
-      email    = req.body.email;
+  var username = req.body.createAccountUsername,
+      password = req.body.createAccountPassword,
+      email    = req.body.createAccountEmail;
   //req.body holds json formatted information from the input text field that the user has submitted
   //we can parse req.body to grab the inputted info and check the infor agains the database
   console.log(req.body);
@@ -53,8 +53,8 @@ app.post('/register',function(req,res){
 //This route is activated when the user clicks to login
 app.post('/login',function(req,res){
   console.log("login");
-  var username = req.body.username,
-      password = req.body.password;
+  var username = req.body.loginUsername,
+      password = req.body.loginPassword;
   console.log(req.body);
 })
 
