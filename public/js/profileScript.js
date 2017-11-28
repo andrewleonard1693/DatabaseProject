@@ -1,5 +1,6 @@
 $(function(){
     var states = [
+        {value: 'All hotels'},
         { value: 'Alabama'},
         { value: 'Alaska'},
         { value: 'Arizona'},
