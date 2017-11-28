@@ -40,6 +40,9 @@ app.get('/', function (req, res) {
   //render the homepage template
   res.render('homepage');
 });
+app.get('/profile',function(req,res){
+  res.render('profile');
+})
 //This route is activated when the user clicks the create account button
 app.post('/register',function(req,res){
   console.log("hello");
@@ -50,6 +53,9 @@ app.post('/register',function(req,res){
   //we can parse req.body to grab the inputted info and check the infor agains the database
   console.log(req.body);
 });
+app.post('/search',function(req,res){
+console.log("got here");
+})
 //This route is activated when the user clicks to login
 app.post('/login',function(req,res){
   console.log("login");
