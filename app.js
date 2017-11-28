@@ -22,13 +22,12 @@ connection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
- 
   console.log('connected as id ' + connection.threadId);
 });
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
+
 //set the view engine to ejs
 app.set('view engine','ejs');
 
@@ -40,9 +39,12 @@ app.get('/', function (req, res) {
   //render the homepage template
   res.render('homepage');
 });
+
+//route for a user profile
 app.get('/profile',function(req,res){
   res.render('profile');
 })
+
 //This route is activated when the user clicks the create account button
 app.post('/register',function(req,res){
   console.log("hello");
@@ -53,9 +55,14 @@ app.post('/register',function(req,res){
   //we can parse req.body to grab the inputted info and check the infor agains the database
   console.log(req.body);
 });
+
+//route activated when the user clicks enter in the search field
 app.post('/search',function(req,res){
-console.log("got here");
+  //grab the state that the user searched for
+  var requestedState = req.body.state;
+  console.log(req.body);
 })
+
 //This route is activated when the user clicks to login
 app.post('/login',function(req,res){
   console.log("login");
