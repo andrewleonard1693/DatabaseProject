@@ -57,7 +57,7 @@ var typed = new Typed('#searchBar', {
     loop: true,
     fadeOut: true,
     typeSpeed: 50,
-    backDelay: 500,
+    backSpeed:0,
     startDelay: 1000
   });
 
