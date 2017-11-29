@@ -1,12 +1,12 @@
 
 
 // node package declarations
-var mysql      	= 	require('mysql'),
-  socket		= 	require('socketio'),
-  bodyParser	=	require('body-parser'),
-  cookieParser = require('cookie-parser'),
-	express		=	require('express'),
-	app			=	express();
+var mysql       	= 	require('mysql'),
+    io		        = 	require('socket.io'),
+    bodyParser	  =	require('body-parser'),
+    cookieParser  = require('cookie-parser'),
+	  express		    =	require('express'),
+	  app			      =	express();
 
 //create the connection details to the mysql database
 var connection = mysql.createConnection({

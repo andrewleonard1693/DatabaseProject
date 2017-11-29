@@ -58,9 +58,12 @@ $(function(){
         lookup: states,
         onSelect: function (suggestion) {
             console.log(suggestion.value);
-        //   var thehtml = '<strong>Currency Name:</strong> ' + suggestion.value + ' <br> <strong>Symbol:</strong> ' + suggestion.data;
-        //   $('#outputcontent').html(thehtml);
         }
       });
 
     });
+    var socket = io();
+    //validate socket-io connection
+    socket.on('connection',function(sock){
+        console.log("Now connected using socket-io");
+    })
