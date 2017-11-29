@@ -64,6 +64,11 @@ $(function(){
       });
 
     });
+    
+    var typed = new Typed('#searchBar', {
+        strings: ["This is a JavaScript library", "This is an ES6 module"],
+        smartBackspace: true // Default value
+      });
     //testing successful connection of socket.io
     socket.on('testConnection',function(returnedData){
         console.log(returnedData.data);

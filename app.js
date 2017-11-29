@@ -63,7 +63,7 @@ app.get('/', function (req, res) {
 
 //route for a user profile
 app.get('/profile',function(req,res){
-  //renders the profile page and passes in the 
+  //renders the profile page and passes in the title string to set for the header of the side bar
   res.render('profile',{title:"temporary title"});
 })
 
