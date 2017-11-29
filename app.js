@@ -35,6 +35,14 @@ io.on('connection',function(socket){
   socket.emit('testConnection', {data: "This is test data."});
 })
 
+io.on('myReservations',function(socket){
+  //perform queries to pull up user's reservations
+})
+
+io.on('myReviews',function(socket){
+  //perform queries to pull up user's reviews
+})
+
 //===============EXPRESS SETUP==============
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -74,11 +82,10 @@ app.post('/search',function(req,res){
   //grab the state that the user searched for
   var requestedState = req.body.state;
   var query = 'SELECT * FROM Location l LEFT JOIN Hotel h on l.Hotel_ID=h.Hotel_ID LEFT JOIN Phones p on p.Hotel_ID=h.Hotel_ID WHERE l.State = ?';
-  connection.query(query,[requestedState],function(err,rows){
-    if (err) console.log(err);
-    console.log(rows);
-  });
-  console.log(req.body);
+    connection.query(query,[requestedState],function(err,rows){
+      if (err) console.log(err);
+      console.log(rows);
+    });
 })
 
 //This route is activated when the user clicks to login
