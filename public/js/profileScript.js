@@ -1,5 +1,67 @@
 //socket io setup
 var socket=io({transports: ['websocket']});
+var typed = new Typed('#searchBar', {
+    strings: [
+        'Alabama',
+        'Alaska',
+        'Arizona',
+        'Arkansas',
+        'California',
+        'Colorado',
+        'Connecticut',
+        'Delaware',
+        'Florida',
+        'Georgia',
+        'Hawaii',
+        'Idaho',
+        'Illinois',
+        'Indiana',
+        'Iowa',
+        'Kansas',
+        'Kentucky',
+        'Louisiana',
+        'Maine',
+        'Maryland',
+        'Massachusetts',
+        'Michigan',
+        'Minnesota',
+        'Mississippi',
+        'Missouri',
+        'Montana',
+        'Nebraska',
+        'Nevada',
+        'New Hampshire',
+        'New Jersey',
+        'New Mexico',
+        'New York',
+        'North Carolina',
+        'North Dakota',
+        'Ohio',
+        'Oklahoma',
+        'Oregon',
+        'Pennsylvania',
+        'Rhode Island',
+        'South Carolina',
+        'South Dakota',
+        'Tennessee',
+        'Texas',
+        'Utah',
+        'Vermont',
+        'Virginia',
+        'Washington',
+        'West Virginia',
+        'Wisconsin',
+        'Wyoming'
+        ],
+    smartBackspace: true,
+    loop: true,
+    fadeOut: true,
+    typeSpeed: 50,
+    backDelay: 500,
+    startDelay: 1000
+  });
+
+
 $(function(){
     var states = [
         {value: 'All hotels'},
@@ -53,7 +115,11 @@ $(function(){
         { value: 'West Virginia'},
         { value: 'Wisconsin'},
         { value: 'Wyoming'}
-    ];     
+    ];  
+    $('#searchBar:text').on('click',function(event){
+        typed.stop();
+        $(this).val('');
+    })   
      
       // setup autocomplete function pulling from currencies[] array
       $('#searchBar').autocomplete({
@@ -64,11 +130,6 @@ $(function(){
       });
 
     });
-    
-    var typed = new Typed('#searchBar', {
-        strings: ["This is a JavaScript library", "This is an ES6 module"],
-        smartBackspace: true // Default value
-      });
     //testing successful connection of socket.io
     socket.on('testConnection',function(returnedData){
         console.log(returnedData.data);
