@@ -64,8 +64,6 @@ app.post('/register',function(req,res){
   var username = req.body.createAccountUsername,
       password = req.body.createAccountPassword,
       email    = req.body.createAccountEmail;
-      var query = 'Insert into Customer (username, password, email) values ('+username+','+password+','+email+')';
-      console.log(query);
   //req.body holds json formatted information from the input text field that the user has submitted
   //we can parse req.body to grab the inputted info and check the infor agains the database
   console.log(req.body);
