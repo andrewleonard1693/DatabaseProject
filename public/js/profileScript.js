@@ -1,7 +1,5 @@
 //socket io setup
 var socket=io({transports: ['websocket']});
-
-
 $(function(){
     var states = [
         {value: 'All hotels'},

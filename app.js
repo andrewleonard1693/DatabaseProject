@@ -73,6 +73,11 @@ app.post('/register',function(req,res){
 app.post('/search',function(req,res){
   //grab the state that the user searched for
   var requestedState = req.body.state;
+  var query = 'SELECT * FROM Location l LEFT JOIN Hotel h on l.Hotel_ID=h.Hotel_ID LEFT JOIN Phones p on p.Hotel_ID=h.Hotel_ID WHERE l.State = ?';
+  connection.query(query,[requestedState],function(err,rows){
+    if (err) console.log(err);
+    console.log(rows);
+  });
   console.log(req.body);
 })
 
