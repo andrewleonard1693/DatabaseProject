@@ -1,25 +1,17 @@
 
 
-// node package declarations
+// node package variable declarations
 var mysql       	= 	require('mysql'),
-    // http          =   require('http'),
     bodyParser	  =	  require('body-parser'),
     cookieParser  =   require('cookie-parser'),
-	  express		    =	  require('express');
-    // app			      =	  express();
-
-    var app = require('express')();
-    var server = require('http').Server(app);
-    var io = require('socket.io')(server);
+    app           =   require('express')(),
+    server        =   require('http').Server(app),
+    io            =   require('socket.io')(server);
+    //tell the server to listen on port 8080
     server.listen(8080);
 
 
-//http connection server
-// var httpServer = http.createServer(function (req, res) {
-//   console.log("server running on port 8080")
-// },app);
-
-// var io = require('socket.io')(httpServer);
+//===========MYSQL CONNECTION===========    
 //create the connection details to the mysql database
 var connection = mysql.createConnection({
   host     : 'db-instance.cgs2c9qhx8la.us-east-2.rds.amazonaws.com',
@@ -36,19 +28,23 @@ connection.connect(function(err) {
   }
   console.log('connected as id ' + connection.threadId);
 });
-//connection successful test
+//================SOCKET.IO================
+//testing connection between front end and back end 
 io.on('connection',function(socket){
   socket.emit('testConnection', {data: "This is test data."});
 })
+
+//===============EXPRESS SETUP==============
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-
 //set the view engine to ejs
 app.set('view engine','ejs');
-
 //allow the express app to render the static files in the public folder
 app.use(express.static('public'));
+
+
+//================ROUTES==================
 
 //route for homepage
 app.get('/', function (req, res) {
@@ -85,10 +81,4 @@ app.post('/login',function(req,res){
   var username = req.body.loginUsername,
       password = req.body.loginPassword;
   console.log(req.body);
-})
-
-//Starts up the node server listening on port 8080
-// app.listen(8080, function () {
-//   console.log('Example app listening on port 8080!')
-// })
-// httpServer.listen(8080);
+});

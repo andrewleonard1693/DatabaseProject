@@ -67,7 +67,7 @@ $(function(){
 
     });
     //testing successful connection of socket.io
-    socket.on('testConnection',function(data){
-        console.log(data.data);
+    socket.on('testConnection',function(returnedData){
+        console.log(returnedData.data);
     })
     //validate socket-io connection
