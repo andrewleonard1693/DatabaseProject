@@ -63,7 +63,8 @@ app.get('/', function (req, res) {
 
 //route for a user profile
 app.get('/profile',function(req,res){
-  res.render('profile');
+  //renders the profile page and passes in the 
+  res.render('profile',{title:"temporary title"});
 })
 
 //This route is activated when the user clicks the create account button
