@@ -2,12 +2,24 @@
 
 // node package declarations
 var mysql       	= 	require('mysql'),
-    io		        = 	require('socket.io'),
-    bodyParser	  =	require('body-parser'),
-    cookieParser  = require('cookie-parser'),
-	  express		    =	require('express'),
-	  app			      =	express();
+    // http          =   require('http'),
+    bodyParser	  =	  require('body-parser'),
+    cookieParser  =   require('cookie-parser'),
+	  express		    =	  require('express');
+    // app			      =	  express();
 
+    var app = require('express')();
+    var server = require('http').Server(app);
+    var io = require('socket.io')(server);
+    server.listen(8080);
+
+
+//http connection server
+// var httpServer = http.createServer(function (req, res) {
+//   console.log("server running on port 8080")
+// },app);
+
+// var io = require('socket.io')(httpServer);
 //create the connection details to the mysql database
 var connection = mysql.createConnection({
   host     : 'db-instance.cgs2c9qhx8la.us-east-2.rds.amazonaws.com',
@@ -24,6 +36,10 @@ connection.connect(function(err) {
   }
   console.log('connected as id ' + connection.threadId);
 });
+//connection successful test
+io.on('connection',function(socket){
+  socket.emit('testConnection', {data: "This is test data."});
+})
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -72,6 +88,7 @@ app.post('/login',function(req,res){
 })
 
 //Starts up the node server listening on port 8080
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
-})
+// app.listen(8080, function () {
+//   console.log('Example app listening on port 8080!')
+// })
+// httpServer.listen(8080);

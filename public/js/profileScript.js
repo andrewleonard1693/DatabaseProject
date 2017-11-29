@@ -1,3 +1,7 @@
+//socket io setup
+var socket=io({transports: ['websocket']});
+
+
 $(function(){
     var states = [
         {value: 'All hotels'},
@@ -62,8 +66,8 @@ $(function(){
       });
 
     });
-    var socket = io();
-    //validate socket-io connection
-    socket.on('connection',function(sock){
-        console.log("Now connected using socket-io");
+    //testing successful connection of socket.io
+    socket.on('testConnection',function(data){
+        console.log(data.data);
     })
+    //validate socket-io connection
