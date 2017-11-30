@@ -37,8 +37,8 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
-
+        console.log(user);
+        done(null, user.cid);
     });
 
     // used to deserialize the user
@@ -80,6 +80,7 @@ module.exports = function(passport) {
                     return done(null, false);
                 } else {
                     console.log("got into the insertion part")
+                    console.log(req.user.email);
                     // if there is no user with that username
                     // create the user
                     var newUserMysql = {
@@ -91,7 +92,7 @@ module.exports = function(passport) {
                     var insertQuery = "INSERT INTO Customer ( username, password, email ) values (?,?,?)";
 
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password,newUserMysql.email],function(err, rows) {
-                        newUserMysql.id = rows.insertId;
+                        newUserMysql.cid = rows.insertId;
                         return done(null, newUserMysql);
                     });
                 }
