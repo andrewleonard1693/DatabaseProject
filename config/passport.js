@@ -37,7 +37,7 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        console.log(user);
+        // console.log(user);
         done(null, user.cid);
     });
 
@@ -67,20 +67,19 @@ module.exports = function(passport) {
         function(req, username, password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
-            console.log(username);
-            console.log(password);
+            // console.log(username);
+            // console.log(password);
             connection.query("SELECT * FROM Customer WHERE username = ?",[username], function(err, rows) {
-                console.log(rows);
+                // console.log(rows);
                 if (err){
                     return done(err);
                 }
                 if (rows.length) {
-                    console.log("length = 0")
+                    // console.log("length = 0")
                     // return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                     return done(null, false);
                 } else {
-                    console.log("got into the insertion part")
-                    console.log(req.user.email);
+                    console.log(req.body);
                     // if there is no user with that username
                     // create the user
                     var newUserMysql = {

@@ -5,11 +5,8 @@ module.exports = function(app, passport) {
         // HOME PAGE (with login links) ========
         // =====================================
         app.get('/', function(req, res) {
-            console.log("helo")
-            res.render('homepage'
-            //render the homepage and any flash messages if there are any
-            // { message: req.flash('signupMessage') }
-            ); // load the index.ejs file
+            res.render('homepage');
+            //{ message: req.flash('signupMessage') }); // load the index.ejs file
         });
     
         // =====================================
@@ -70,6 +67,7 @@ module.exports = function(app, passport) {
     function isLoggedIn(req, res, next) {
         // if user is authenticated in the session, carry on
         if (req.isAuthenticated()){
+            // res.redirect('/profile');
             console.log("isloggedin")
             return next();  
         }else{
