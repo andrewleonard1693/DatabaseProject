@@ -58,7 +58,7 @@ app.use(flash());
 require('./app/socketio')(io,connection);
 
 //================ROUTES==================
-require('./app/routes')(app,passport);
+require('./app/routes')(app,passport,io);
 
 // //route for homepage
 // app.get('/', function (req, res) {

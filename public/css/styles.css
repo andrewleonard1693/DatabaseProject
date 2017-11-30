@@ -84,6 +84,9 @@ nav a:hover{
   .trigger-custom:hover{
     background:#d5d5d5;
   }
+  #modal-custom {
+    display:none;
+  }
   
   #modal-custom .iziModal-content header{
       background: #eee;
