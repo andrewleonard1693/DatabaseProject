@@ -1,4 +1,4 @@
-module.exports= function(io){
+module.exports = function(io,connection){
 
     //=================SOCKET FUNCTIONS================
     io.on('connection',function(socket){

@@ -16,25 +16,25 @@ var mysql       	= 	require('mysql'),
 
 
 // //===========MYSQL CONNECTION===========    
-// //create the connection details to the mysql database
-// var connection = mysql.createConnection({
-//   host     : 'db-instance.cgs2c9qhx8la.us-east-2.rds.amazonaws.com',
-//   port	   : '3306',
-//   user     : 'ajl246',
-//   password : 'db-master-password',
-//   database: 'PristineHotels'
-// });
-// //connect to db
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('error connecting: ' + err.stack);
-//     return;
-//   }
-//   console.log('connected as id ' + connection.threadId);
-// });
+//create the connection details to the mysql database
+var connection = mysql.createConnection({
+  host     : 'db-instance.cgs2c9qhx8la.us-east-2.rds.amazonaws.com',
+  port	   : '3306',
+  user     : 'ajl246',
+  password : 'db-master-password',
+  database: 'PristineHotels'
+});
+//connect to db
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
+});
 
 //=============PASSPORT SETUP=============
-require('./config/passport')(passport);
+require('./config/passport')(passport,connection);
 
 //===============EXPRESS SETUP==============
 app.use(bodyParser.json());
@@ -55,7 +55,7 @@ app.use(passport.session());
 app.use(flash());
 
 //=============SOCKET IO SETUP============
-require('./app/socketio')(io);
+require('./app/socketio')(io,connection);
 
 //================ROUTES==================
 require('./app/routes')(app,passport);
