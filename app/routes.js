@@ -52,10 +52,8 @@ module.exports = function(app, passport) {
         // we will want this protected so you have to be logged in to visit
         // we will use route middleware to verify this (the isLoggedIn function)
         app.get('/profile', isLoggedIn, function(req, res) {
-            // console.log(req);
-            console.log(req.user);
             res.render('profile', {
-                user : req.user,
+                user : req.user.username,
                 hotelTitle: "All Hotels" // get the user out of session and pass to template
             });
         });
@@ -72,12 +70,12 @@ module.exports = function(app, passport) {
     function isLoggedIn(req, res, next) {
     
         // if user is authenticated in the session, carry on
-        if (req.isAuthenticated())
+        if (req.isAuthenticated()){
             console.log("isloggedin")
-            return next();
-    
-        // if they aren't redirect them to the home page
-        console.log("not authneitcated")
-        res.redirect('/');
+            return next();  
+        }else{
+            console.log("not authneitcated")
+            res.redirect('/')  
+        }
     }
     
