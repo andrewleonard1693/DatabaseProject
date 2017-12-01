@@ -1,7 +1,49 @@
  body {
     overflow-x: hidden;
   }
-  
+
+.myBox {
+background: black;
+border: 1px solid black;
+padding: 15px;
+font: 24px/36px sans-serif;
+width: 925px;
+height: 500px;
+overflow: scroll;
+}
+
+.myHotel {
+background: white;
+border: 1px solid black;
+padding: 10px;
+font: 24px/36px sans-serif;
+width: 894px;
+height: 200px;
+}
+
+.myFacts {
+background: white;
+border: 1px solid black;
+padding: 10px;
+font: 24px/36px sans-serif;
+width: 70%;
+height: 200px;
+}
+
+img {
+    border: 1px solid #ddd; 
+    border-radius: 4px;  
+    padding: 5px; 
+    width: 100%; 
+    height: 150px;
+
+}
+
+/* Add a hover effect (blue shadow) */
+img:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
   #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -43,8 +85,7 @@
     position: absolute;
     margin-right: -250px;
   }
-  
-  
+
   /* Sidebar Styles */
   .sidebar-nav {
     position: absolute;
