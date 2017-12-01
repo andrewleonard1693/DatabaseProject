@@ -1,0 +1,26 @@
+body{
+    background-image: url('../assets/dark_homepage_background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@media (min-width: 500px) {
+    .my-custom-container{
+        width:500px;
+    }}
+    
+    @media (min-width: 992px) {
+    .my-custom-container{
+        width:500px;
+    }}
+    
+    @media (min-width: 1200px) {
+    .my-custom-container{
+        width:500px;
+    }}
+
+    .my-custom-container {
+        background-color: white;
+    }

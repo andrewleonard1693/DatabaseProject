@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>Hotel Application</title>
+    <!-- date picker -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!-- roboto font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- our own css styles -->
@@ -16,6 +20,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
 </head>
 <body>
-    <p>Hello Babe, How You Doin ;)</p>
+    
+        <div class="container my-custom-container">
+                <style>
+                        div {
+                            background-color: white;
+                            padding-top: 50px;
+                            padding-right: 30px;
+                            padding-bottom: 40px;
+                            padding-left: 80px;
+                            margin: 40px;
+                            margin-bottom: 20px;
+                        }
+                        </style>
+                <h2>Book Reservation</h2>
+                        <style>
+                            h2 {
+                                text-align: center;
+                                color: #000;
+                            }
+                            </style>
+                <form>
+                  <div class="form-group">
+                        <style>
+                                div {
+                                    background-color: white;
+                                    padding-top: 15px;
+                                    padding-right: 10px;
+                                    padding-bottom: 15px;
+                                    padding-left: 80px;
+                                    margin: 20px;
+                                }
+                                </style>
+                    <label for="name">Name:</label>
+                    <style>
+                            label {
+                                color: black;
+                                
+                            }
+                            </style>
+                    <input type="name" class="form-control" id="name" placeholder="Enter Name">
+                    <style>
+                        input {
+                            border-color: #5CB85C;
+                        }
+                        </style>
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="username" class="form-control" id="username" placeholder="Enter username">
+                  </div>
+
+                  <div class="form-group">
+                        <label for="startDate">Check-in Date:</label>
+                        <input type="date" class="form-control" id="startDate" placeholder="MM/DD/YYYY">
+                      </div>
+
+                    <div class="form-group">
+                        <label for="endDate">Check-out Date:</label>
+                        <input type="date" class="form-control" id="endDate" placeholder="MM/DD/YYYY">
+                      </div>
+                  
+
+                  <button type="submit" class="btn btn-success">Reserve</button>
+                  <style>
+                      button {
+                        padding-top: 30px;
+                        padding-right: 10px;
+                        padding-bottom: 30px;
+                        padding-left: 80px;
+                        margin: 20px;
+                      }
+                      </style>
+                </form>
+              </div>
 </body>
 <html>
