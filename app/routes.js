@@ -55,6 +55,12 @@ module.exports = function(app, passport,io) {
             });
         });
         // =====================================
+        // REVIEW SECTION ======================
+        // =====================================
+        app.get('/reserveHotel', function(req, res) {
+            res.render('reservation');
+        });
+        // =====================================
         // LOGOUT ==============================
         // =====================================
         app.get('/logout', function(req, res) {
