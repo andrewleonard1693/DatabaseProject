@@ -7,7 +7,7 @@
 	<!-- roboto font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<!-- our own css styles -->
-	<link rel="stylesheet" href="css/profileView.css">
+	<link rel="stylesheet" href="/css/profileView.css">
 	<!-- bootstrap css cdn-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<!-- font awesome cdn -->
@@ -25,19 +25,13 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
-                        <a href="#" id="profile"> <%=JSON.stringify(user).replace(/['"]+/g, '')%> </a>
+                        <a href="<%=originalUrl%>" id="profile"> <%=JSON.stringify(user).replace(/['"]+/g, '')%> </a>
                     </li>
                     <li>
-                        <a href="#" id="myReservations">My Reservations</a>
+                        <a href="<%=myReservations%>" id="myReservations">My Reservations</a>
                     </li>
                     <li>
-                        <a href="#" id="myReviews">My Reviews</a>
-                    </li>
-                    <li>
-                        <a href="#" id="reserveHotel">Reserve a Hotel</a>
-                    </li>
-                    <li>
-                        <a href="#" id="writeReview">Write a Review</a>
+                        <a href="<%=myReviews%>" id="myReviews">My Reviews</a>
                     </li>
                     <li>
                         <a href="/logout" id="signOut">Logout</a>
@@ -52,7 +46,7 @@
                     <div class="row text-center">
                         <div class="col-lg-12">
                             <div id = "searchField">
-                                <form method="post" action='/search'>
+                                <form method="post" action='<%=searchRoute%>'>
                                     <input type="text" name="state" class="biginput" id="searchBar">
                                 </form>
                             </div>
@@ -79,9 +73,9 @@
 	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.2.0/js/iziToast.min.js"></script>
-    <script src="js/jquery.autocomplete.min.js"></script>
-    <script src="js/typed.min.js"></script>
+    <script src="/js/jquery.autocomplete.min.js"></script>
+    <script src="/js/typed.min.js"></script>
 	<!-- our own js scripts file -->
-	<script src="js/profileScript.js"></script>
+	<script src="/js/profileScript.js"></script>
 </body>
 </html>
