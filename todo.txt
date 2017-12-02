@@ -1,8 +1,41 @@
 Todo:
-1.	User has ability to register/sign in 
-    a. Perform checks against the database when a user attempts to login/register
-2.	Once user signs in, redirect to their profile page
-3.	Search bar for hotels underneath welcome text on landing page
-4.	Sidebar for user reservations, reviews written, credit card information?
-5.	User has ability to reserve hotel with check in/check out date
-6.	User has ability to write review about a stay at a hotel
+1.  Create partials for the main profile page
+2.  Get the user's email from the registration form
+3.  Dynamically add all of the hotels to the profile page when the user first logs in
+4.  Create a different view for viewing a user's reservations
+    a. query for user's reserved hotels and send them back to the view with ejs
+5.  Create a different view for viewing a user's reviews
+    a. query for user's reviews and send them back to the view with ejs
+6.	Sidebar for user reservations, reviews written, credit card information
+7.	User has ability to reserve hotel with check in/check out date
+8.	User has ability to write review about a stay at a hotel
+9.  User can write a review about a breakfast/service and submit information
+10. User can pick breakfast or service
+11. Populate the breakfast and service tables with dummy data
+12. Populate the room table with dummy rooms with room numbers and randomly generated date ranges for discounted prices
+13. Create view for reserving a hotel
+14. Update the reviews table to include a rating if not there already 
+15. Allow the user to rate a breakfast/service review
+
+
+============newreservation============
+1. Allow the user to select dates, breakfast type, service type etc
+2. Check if all rooms are currently reserved?
+3. Send a post request with all of the information to the server to create a new reservation and add it to the database
+
+========newreview===============
+1. Allow the user to select what type of review they would like to leave (breakfast, service)
+2. Allow the user to specify a rating 
+3. Allow the user to write a text review
+
+
+
+=========myreservations===========
+1. Allow the user to delete a reservation or edit a reservation
+2. Display the reservation details (dates, price, invoice number, room, breakfast, service etc)
+
+
+
+===========myreviews=============
+1. Allow the user to delete a review or edit their current review
+2. Show the review information (hotelId, hotel picture, hotel location, phone number, review text, rating, etc)
