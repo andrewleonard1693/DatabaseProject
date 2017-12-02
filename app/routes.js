@@ -64,7 +64,16 @@ module.exports = function(app, passport,io,connection) {
 
         //route to display the current user's reservations
         app.get("/profile/:username/myreservations",function(req,res){
-            res.render("myreservations");
+            //TODO: perform query logic to find the current user's reservations and pass them back to the view
+            //NOTE: remember to add an edit and delete button to the user's reservation with text inputs set to not editable
+            //at first and a delete button with maybe a prompt saying are you sure
+            res.render("myreservations", {
+                user : req.params.username,
+                originalUrl: "/profile/"+req.params.username,
+                hotelTitle: "My Reservations",
+                myReservations: req.originalUrl,
+                myReviews: "/profile/"+req.params.username
+            });
         })
 
         //route for the reserve hotel page
@@ -84,13 +93,12 @@ module.exports = function(app, passport,io,connection) {
             //res.render('profile',{
                 //hotels: hotels
             })
-            
-            // res.render('profile',{
-            // })
+
         //route for the write a review page
         app.get("/profile/:username/:state/:hotelId/review",function(req,res){
 
         });
+
         //route for the post of the search term for the states
         app.post("/profile/:username/search",function(req,res){
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
