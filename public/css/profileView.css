@@ -201,9 +201,15 @@
   }
 
   .hotelImage {
+    border-radius: 4px;  
+    width: 100%; 
+    height: 100%;
+  }
+  
+  .hotelButton {
     width:100%;
-    height:100%;
-    border-radius: 2px;
+    margin-top:25%;
+    
   }
   /* .hotelInformation {
 

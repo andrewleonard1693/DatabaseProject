@@ -52,14 +52,24 @@ module.exports = function(app, passport,io,connection) {
         app.get('/profile/:username',isLoggedIn,function(req,res){
             //original url
             console.log("Original url "+req.originalUrl);
+            var query = "select h.Hotel_Id, h.imagePath, l.Street, l.City, l.State, l.Country, l.ZIP, p.Phone from Hotel h left join Location l on h.Hotel_Id=l.Hotel_Id left join Phones p on p.Hotel_Id = l.Hotel_Id;"
+            var hotels = null;
+            connection.query(query, function(err,rows){
+                if(err){
+                    console.log(err);
+                    return;
+                }
+            hotels=rows;
             res.render('profile', {
                 user : req.user.username,
                 originalUrl: req.originalUrl,
                 hotelTitle: "All Hotels", // get the user out of session and pass to template
                 myReservations: req.originalUrl+"/myreservations",
                 myReviews: req.originalUrl+"/myreviews",
-                searchRoute: req.originalUrl+"/search" 
+                searchRoute: req.originalUrl+"/search", 
+                hotels: hotels
             });
+            })
         })
 
         //route to display the current user's reservations

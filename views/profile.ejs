@@ -61,42 +61,36 @@
                     </div>
                     <!--content for dynamic content goes here -->
                     <div class="outerContainer">
+
                         <!-- Dynamic addition of hotels -->
-                        <div class="hotelContainer">
-                            <p>test</p>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <!-- add the image here and make it full width  -->
-                                </div>
-                                <div class="col-lg-6">
+                        <% console.log(hotels) %>
+                        <% hotels.forEach(function(hotel){ %>
+                            <div class="hotelContainer">
                                     <div class="row">
-                                        <!-- add hotel information here buttons/etc -->
-                                    </div>
-
+                                        <div class="col-sm-6">
+                                            <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h2 id="hotelNumber"><%=hotel.hotel_Id%></h2>
+                                            <h5 id="hotelStreet"><%=hotel.Street%></h5>
+                                            <h5 id="hotelCity"><%=hotel.City%></h5>
+                                            <h5 id="hotelState"><%=hotel.State%></h5>
+                                            <h5 id="hotelCountry">hotel.Country</h5>
+                                            <h5 id="hotelPhone">hotel.Phone</h5>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn btn-primary hotelButton writeReviewButton">Write Review</button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn btn-success hotelButton reserveHotelButton">Reserve</button> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </div>
-                            </div>
-                            
-                        </div>
-                        <div class="hotelContainer">
-                            <p>test</p>
-                        </div>
-                        <div class="hotelContainer">
-                            <p>test</p>
-                        </div>
-                        <div class="hotelContainer">
-                            <p>test</p>
-                        </div>
-                        <div class="hotelContainer">
-                            <p>test</p>
-                        </div>
-                        <div class="hotelContainer">
-                            <p>test</p>
-                        </div>
-
+                        <%});%>
 
                     </div>
-
-                    
                 </div>
             </div>
             <!-- /#page-content-wrapper -->
