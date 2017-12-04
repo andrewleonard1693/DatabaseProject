@@ -63,7 +63,6 @@
                     <div class="outerContainer">
 
                         <!-- Dynamic addition of hotels -->
-                        <% console.log(hotels) %>
                         <% hotels.forEach(function(hotel){ %>
                             <div class="hotelContainer">
                                     <div class="row">
@@ -71,12 +70,12 @@
                                             <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <h2 id="hotelNumber"><%=hotel.Hotel_Id%></h2>
-                                            <h5 id="hotelStreet"><%=hotel.Street%></h5>
-                                            <h5 id="hotelCity"><%=hotel.City%></h5>
-                                            <h5 id="hotelState"><%=hotel.State%></h5>
-                                            <h5 id="hotelCountry"><%=hotel.Country%></h5>
-                                            <h5 id="hotelPhone"><%=hotel.Phone%></h5>
+                                            <h2 id="hotelNumber">ID: <%=hotel.Hotel_Id%></h2>
+                                            <h5 id="hotelStreet">Street: <%=hotel.Street%></h5>
+                                            <h5 id="hotelCity">City: <%=hotel.City%></h5>
+                                            <h5 id="hotelState">State: <%=hotel.State%></h5>
+                                            <h5 id="hotelCountry">Country: <%=hotel.Country%></h5>
+                                            <h5 id="hotelPhone">Phone #: <%=hotel.Phone%></h5>
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <button type="button" class="btn btn-primary hotelButton writeReviewButton">Write Review</button>

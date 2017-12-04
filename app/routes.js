@@ -87,7 +87,7 @@ module.exports = function(app, passport,io,connection) {
         })
 
         //route for the reserve hotel page
-        app.get("/profile/:username/:hotelId/reservation",function(req,res){
+        app.get("/profile/:username/:state/:hotelId/reservation",function(req,res){
             //query the database for the 
             res.render('reservation',
             {   hotelId: req.params.hotelId,
@@ -100,6 +100,23 @@ module.exports = function(app, passport,io,connection) {
             console.log("state is "+req.params.state);
             //perform query logic to get the hotel information from the user inputted states
             // var hotels = getSearchedStates(req.params.state);
+            var query = "select h.Hotel_Id, h.imagePath, l.Street, l.City, l.State, l.Country, l.ZIP, p.Phone from Hotel h left join Location l on h.Hotel_Id=l.Hotel_Id left join Phones p on p.Hotel_Id = l.Hotel_Id where l.State = ?;"
+            connection.query(query, [req.params.state],function(err,rows){
+                if(err){
+                    console.log(err);
+                }else{
+                    var hotels = rows;
+                    res.render('profile',{
+                        user: req.params.username,
+                        originalUrl: "/profile/"+req.params.username,
+                        hotelTitle: req.params.state,
+                        myReservations: "/profile/"+req.params.username+"/myreservations",
+                        myReviews: "/profile/"+req.params.username+"/myreviews",
+                        searchRoute: "/profile/"+req.params.username+"/search",
+                        hotels: hotels
+                    })
+                }
+            })
             //res.render('profile',{
                 //hotels: hotels
             })
