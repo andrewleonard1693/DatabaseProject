@@ -79,13 +79,12 @@ module.exports = function(passport,connection) {
                     // return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                     return done(null, false);
                 } else {
-                    console.log(req.body);
                     // if there is no user with that username
                     // create the user
                     var newUserMysql = {
                         username: username,
                         password: password,  // use the generateHash function in our user model
-                        email: req.createAccountEmail
+                        email: req.body.createAccountEmail
                     };
 
                     var insertQuery = "INSERT INTO Customer ( username, password, email ) values (?,?,?)";
