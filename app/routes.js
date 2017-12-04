@@ -55,6 +55,12 @@ module.exports = function(app, passport,io) {
             });
         });
         // =====================================
+        // REVIEW SECTION ======================
+        // =====================================
+        app.get('/writeReview', function(req, res) {
+            res.render('reviewWindow');
+        });
+        // =====================================
         // LOGOUT ==============================
         // =====================================
         app.get('/logout', function(req, res) {
