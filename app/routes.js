@@ -85,16 +85,6 @@ module.exports = function(app, passport,io,connection) {
                 myReviews: "/profile/"+req.params.username
             });
         })
-
-        //route for the reserve hotel page
-        app.get("/profile/:username/:state/:hotelId/reservation",function(req,res){
-            //query the database for the 
-            res.render('reservation',
-            {   hotelId: req.params.hotelId,
-                location:req.params.location,
-                user: req.params.username
-            })
-        })
         //route to render all of the hotels with the user searched state
         app.get("/profile/:username/:state",function(req,res){
             console.log("state is "+req.params.state);
@@ -126,8 +116,16 @@ module.exports = function(app, passport,io,connection) {
 
         //route for the write a review page
         app.get("/profile/:username/:state/:hotelId/review",function(req,res){
-
+            //render the review page and pass in all the relevant information about the hotel
         });
+          //route for the reserve hotel page
+        app.get("/profile/:username/:state/:hotelId/reserve",function(req,res){
+            //query the database for the 
+            res.render('reservation',
+            {   hotelId: req.params.hotelId,
+                user: req.params.username,
+            })
+        })
 
         //route for the post of the search term for the states
         app.post("/profile/:username/search",function(req,res){
