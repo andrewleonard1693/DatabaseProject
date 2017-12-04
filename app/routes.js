@@ -106,15 +106,20 @@ module.exports = function(app, passport,io,connection) {
                     console.log(err);
                 }else{
                     var hotels = rows;
-                    res.render('profile',{
-                        user: req.params.username,
-                        originalUrl: "/profile/"+req.params.username,
-                        hotelTitle: req.params.state,
-                        myReservations: "/profile/"+req.params.username+"/myreservations",
-                        myReviews: "/profile/"+req.params.username+"/myreviews",
-                        searchRoute: "/profile/"+req.params.username+"/search",
-                        hotels: hotels
-                    })
+                    if(rows.length>0){
+                        res.render('profile',{
+                            user: req.params.username,
+                            originalUrl: "/profile/"+req.params.username,
+                            hotelTitle: req.params.state,
+                            myReservations: "/profile/"+req.params.username+"/myreservations",
+                            myReviews: "/profile/"+req.params.username+"/myreviews",
+                            searchRoute: "/profile/"+req.params.username+"/search",
+                            hotels: hotels
+                        })
+                    }else{
+                        //if the db doesnt return anything then just redirect to the main profile page
+                        res.redirect('/profile/'+req.params.username);
+                    }
                 }
             })
             //res.render('profile',{

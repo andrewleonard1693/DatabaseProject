@@ -71,11 +71,11 @@
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
   }
-  a {
+  .sidebar-nav li a {
     text-decoration: none;
     position: relative;
   }
-  a:after {
+  .sidebar-nav li a:after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -84,7 +84,7 @@
     border-bottom: 1px solid #5CB85C;
     transition: 0.4s;
   }
-  a:hover:after {
+  .sidebar-nav li a:hover:after {
     width: 100%;
   }
   /* .sidebar-nav li a:before {

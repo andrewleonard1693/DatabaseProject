@@ -1,12 +1,10 @@
 Todo:
-1.  Create partials for the main profile page
-2.  Get the user's email from the registration form
-3.  Dynamically add all of the hotels to the profile page when the user first logs in
+2.  Add event listeners to each write review button
+3.  Add event listeners to each generate button
 4.  Create a different view for viewing a user's reservations
     a. query for user's reserved hotels and send them back to the view with ejs
 5.  Create a different view for viewing a user's reviews
     a. query for user's reviews and send them back to the view with ejs
-6.	Sidebar for user reservations, reviews written, credit card information
 7.	User has ability to reserve hotel with check in/check out date
 8.	User has ability to write review about a stay at a hotel
 9.  User can write a review about a breakfast/service and submit information

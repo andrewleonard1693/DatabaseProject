@@ -130,13 +130,14 @@ $(function(){
 
     });
     //testing successful connection of socket.io
-    socket.on('testConnection',function(returnedData){
-        console.log(returnedData);
-        iziToast.success({
-            title: 'Success',
-            message: 'Welcome!',
-        });
-    });
+    // socket.on('testConnection',function(returnedData){
+    //     console.log(returnedData);
+    //     iziToast.success({
+    //         title: 'Success',
+    //         message: 'Welcome!',
+    //     });
+    // });
+   
     //validate socket-io connection
 
 
