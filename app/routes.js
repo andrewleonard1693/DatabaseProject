@@ -122,8 +122,6 @@ module.exports = function(app, passport,io,connection) {
                     }
                 }
             })
-            //res.render('profile',{
-                //hotels: hotels
             })
 
         //route for the write a review page

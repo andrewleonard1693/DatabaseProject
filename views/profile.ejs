@@ -78,10 +78,10 @@
                                             <h5 id="hotelPhone">Phone #: <%=hotel.Phone%></h5>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/review"><button class="btn btn-primary hotelButton writeReviewButton">Write Review</button></a>
+                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/<%=hotel.Hotel_Id%>/review"><button class="btn btn-primary hotelButton writeReviewButton">Write Review</button></a>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/reservation"><button type="button" class="btn btn-success hotelButton reserveHotelButton">Reserve</button></a>
+                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/<%=hotel.Hotel_Id%>/reservation"><button type="button" class="btn btn-success hotelButton reserveHotelButton">Reserve</button></a>
                                                 </div>
                                             </div>
                                         </div>
