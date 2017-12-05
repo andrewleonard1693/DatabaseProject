@@ -1,7 +1,4 @@
 Todo:
-1.  Delete write review buttons on hotels because users can only write reviews for hotels they have reserved
-2.  Add event listeners to each write review button
-3.  Add event listeners to each generate button
 4.  Create a different view for viewing a user's reservations
     a. query for user's reserved hotels and send them back to the view with ejs
 5.  Create a different view for viewing a user's reviews

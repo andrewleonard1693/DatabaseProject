@@ -121,9 +121,9 @@ module.exports = function(app, passport,io,connection) {
           //route for the reserve hotel page
         app.get("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //query the database for the 
-            res.render('reservation',
-            {   hotelId: req.params.hotelId,
-                user: req.params.username,
+            res.render('reserve',
+            {   
+                
             })
         })
 
