@@ -49,6 +49,8 @@ module.exports = function(app, passport,io,connection) {
             res.redirect('/profile/'+req.user.username);
         });
 
+
+        //User's main profile page showing all of the hotels
         app.get('/profile/:username',isLoggedIn,function(req,res){
             //original url
             console.log("Original url "+req.originalUrl);
@@ -85,6 +87,7 @@ module.exports = function(app, passport,io,connection) {
                 myReviews: "/profile/"+req.params.username
             });
         })
+        
         //route to render all of the hotels with the user searched state
         app.get("/profile/:username/:state",function(req,res){
             console.log("state is "+req.params.state);
@@ -128,12 +131,12 @@ module.exports = function(app, passport,io,connection) {
             })
         })
         //route to show the user his/her reservations
-        app.get("/profile/:username/myreservations",function(req,res){
-            res.render('myreservations'
-            {
-                //TODO:
-            })
-        })
+        // app.get("/profile/:username/myreservations",function(req,res){
+        //     res.render('myreservations'
+        //     {
+        //         //TODO:
+        //     })
+        // })
 
         //route to show the user his/her room reviews
         app.get("/profile/:username/myroomreviews",function(req,res){
