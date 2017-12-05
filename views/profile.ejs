@@ -70,12 +70,12 @@
                                             <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
                                         </div>
                                         <div class="col-sm-6">
-                                            <h2 id="hotelNumber">ID: <%=hotel.Hotel_Id%></h2>
-                                            <h5 id="hotelStreet">Street: <%=hotel.Street%></h5>
-                                            <h5 id="hotelCity">City: <%=hotel.City%></h5>
-                                            <h5 id="hotelState">State: <%=hotel.State%></h5>
-                                            <h5 id="hotelCountry">Country: <%=hotel.Country%></h5>
-                                            <h5 id="hotelPhone">Phone #: <%=hotel.Phone%></h5>
+                                            <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=hotel.Hotel_Id%></h2>
+                                            <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> <%=hotel.Street%></h5>
+                                            <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> <%=hotel.City%></h5>
+                                            <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> <%=hotel.State%></h5>
+                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> <%=hotel.Country%></h5>
+                                            <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> <%=hotel.Phone%></h5>
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <a href="/profile/<%=user%>/<%=hotel.State%>/<%=hotel.Hotel_Id%>/reserve"><button type="button" class="btn btn-primary hotelButton reserveHotelButton">Reserve</button></a>
