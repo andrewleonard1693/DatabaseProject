@@ -117,14 +117,37 @@ module.exports = function(app, passport,io,connection) {
         //route for the write a review page
         app.get("/profile/:username/:state/:hotelId/review",function(req,res){
             //render the review page and pass in all the relevant information about the hotel
+            //TODO:
         });
           //route for the reserve hotel page
         app.get("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //query the database for the 
             res.render('reserve',
             {   
-                
+                //TODO:
             })
+        })
+        //route to show the user his/her reservations
+        app.get("/profile/:username/myreservations",function(req,res){
+            res.render('myreservations'
+            {
+                //TODO:
+            })
+        })
+
+        //route to show the user his/her room reviews
+        app.get("/profile/:username/myroomreviews",function(req,res){
+            //TODO:
+        })
+
+        //route to show the user his/her breakfast reviews
+        app.get("/profile/:username/mybreakfastreviews",function(req,res){
+            //TODO:
+        })
+
+        //route to show the user his/her service reviews
+        app.get("/profile/:username/myservicereviews",function(req,res){
+            //TODO:
         })
 
         //route for the post of the search term for the states
