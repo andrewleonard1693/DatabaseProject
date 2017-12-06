@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>Hotel Application</title>
-    <!-- date picker -->
+    <!-- jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <!-- date range picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.css">
     <!-- roboto font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- our own css styles -->
@@ -39,7 +41,7 @@
                         </div>
                     </div>
                     <div class="paymentSection">
-                        <div class="row paymentTitle">
+                        <div class="row sectionTitle">
                             <div class="col-sm-12 text-center">
                                 <h3 id="paymentInfo">Payment Information</h3>
                                 <hr class="paymentHr">
@@ -107,7 +109,7 @@
                 <!-- container for reservation information -->
                 <div class="col-sm-6">
                     <div class="reservationDetails">
-                        <div class="row">
+                        <div class="row sectionTitle">
                             <div class="col-sm-12 text-center">
                                 <h3>Details</h3>
                                 <hr class="paymentHr">
@@ -123,6 +125,12 @@
                                     <option value="Double Queen">Double Queen</option>
                                     <option value="Double Standard">Double Standard</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-sm-12 form-group required">
+                                <label for="dateRange" class="control-label">Duration</label>
+                                <input class="form-control" type="text" name="daterange"/>
                             </div>
                         </div>
                         <div class='form-row'>
@@ -151,12 +159,17 @@
                                 </div>
                             </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" id="reserveButton"class="btn btn-success reserveButton">Reserve</button>
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>
 </form>
 
-
+<script src="/js/reserve.js"></script>
 
 </body>
 </html>

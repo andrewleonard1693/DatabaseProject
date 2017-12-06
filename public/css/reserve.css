@@ -24,7 +24,7 @@ body {
 .paymentHr{
     width:100%;
 }
-.paymentTitle {
+.sectionTitle {
     margin-bottom: 2%;
 }
 .ccIcon {
@@ -32,4 +32,7 @@ body {
     margin-left: 5%;
     margin-bottom: 3%;
     margin-top:3%;
+}
+.reserveButton {
+    width: 92%;
 }
