@@ -1,5 +1,8 @@
-//socket io setup
 var socket=io({transports: ['websocket']});
+
+socket.on("testConnection",function(data){
+   console.log("connected");
+})
 var typed = new Typed('#searchBar', {
     strings: [
         'Alabama',
@@ -129,12 +132,3 @@ $(function(){
       });
 
     });
-    //testing successful connection of socket.io
-    // socket.on('testConnection',function(returnedData){
-    //     console.log(returnedData);
-    //     iziToast.success({
-    //         title: 'Success',
-    //         message: 'Welcome!',
-    //     });
-    // });
-    //validate socket-io connection

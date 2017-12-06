@@ -79,13 +79,17 @@ module.exports = function(app, passport,io,connection) {
             //TODO: perform query logic to find the current user's reservations and pass them back to the view
             //NOTE: remember to add an edit and delete button to the user's reservation with text inputs set to not editable
             //at first and a delete button with maybe a prompt saying are you sure
-            res.render("myreservations", {
-                user : req.params.username,
+            res.render('myreservations',
+            {
                 originalUrl: "/profile/"+req.params.username,
+                myReservations: "/profile/"+req.params.username+"/myreservations",
+                myReviews: "/profile/"+req.params.username+"/myreviews",
                 hotelTitle: "My Reservations",
-                myReservations: req.originalUrl,
-                myReviews: "/profile/"+req.params.username
-            });
+                user: req.params.username,
+                searchRoute: "/profile/"+req.params.username+"/search"
+            }
+        );
+            io.emit('alert');
         })
         
         //route to render all of the hotels with the user searched state
@@ -177,6 +181,11 @@ module.exports = function(app, passport,io,connection) {
         //route for the post of the search term for the states
         app.post("/profile/:username/search",function(req,res){
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
+        })
+        app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
+            //render the myreservations page
+            //emit an event to fire an alert
+            res.redirect("/profile/"+req.params.username+"/myreservations");
         })
         
 
