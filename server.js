@@ -22,7 +22,8 @@ var connection = mysql.createConnection({
   port	   : '3306',
   user     : 'ajl246',
   password : 'db-master-password',
-  database: 'PristineHotels'
+  database: 'PristineHotels',
+  multipleStatements:true
 });
 //connect to db
 connection.connect(function(err) {
