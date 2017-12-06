@@ -125,9 +125,30 @@ module.exports = function(app, passport,io,connection) {
           //route for the reserve hotel page
         app.get("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //query the database for the 
+            var username = req.params.username
+            console.log(req.params.hotelId)
+            var query = "select h.Hotel_ID, h.imagePath, l.Street, l.City, l.State, l.Country, l.ZIP, p.Phone from Hotel h left join Location l on h.Hotel_ID=l.Hotel_ID left join Phones p on p.Hotel_ID = l.Hotel_ID where h.hotel_ID="+req.params.hotelId+";"
+            connection.query(query,function(err,rows){
+                if(err)
+                {
+                    console.log(err);
+                }
+                else{
+                    var hotel = rows[0];
+                    console.log(hotel.imagePath)
+                    console.log(hotel);
+                    res.render('reserve',
+                    {   
+                        //TODO:
+                        username: username,
+                        hotel: hotel
+                    }) 
+                }
+            })
             res.render('reserve',
             {   
                 //TODO:
+                username: req.params.username,
             })
         })
         //route to show the user his/her reservations
@@ -157,6 +178,7 @@ module.exports = function(app, passport,io,connection) {
         app.post("/profile/:username/search",function(req,res){
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
         })
+        
 
         // =====================================
         // LOGOUT ==============================

@@ -1,7 +1,38 @@
 body {
-    background: url('../assets/dark_homepage_background.jpg')
+    background: url('../assets/dark_homepage_background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-.form {
+.outer-container{
     background: white;
-    
+    padding: 4%;
+    margin-top: 5%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    height:100%;
+    overflow: scroll;
+}
+.reserveTitle {
+    margin-bottom: 3%;
+}
+.titleHr {
+    width: 75%;
+}
+.paymentHr{
+    width:100%;
+}
+.paymentTitle {
+    margin-bottom: 2%;
+}
+.ccIcon {
+    width:10%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+    margin-top:3%;
+}
+.ccRadio {
+    display: block;
 }

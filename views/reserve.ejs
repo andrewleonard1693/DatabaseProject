@@ -9,7 +9,7 @@
     <!-- roboto font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- our own css styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/reserve.css">
     <!-- bootstrap css cdn-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <!-- font awesome cdn -->
@@ -18,14 +18,101 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="container">
+    <form>
+    <div class="outer-container">
+        <div class="row reserveTitle">
+            <div class="col-sm-12 text-center">
+                <h1>Reserve</h1>
+                <hr class="titleHr">
+            </div>
+        </div>
         <div class="row">
-            <p>test</p>
-
+            <!-- container for hotel information and payment information -->
+                <div class="col-sm-6">
+                    <!-- hotel image and information -->
+                    <div class="hotelInformation">
+                        <div class="row">
+                        
+                        </div>
+                    </div>
+                    <div class="hotelInfo">
+                        <div class="row paymentTitle">
+                            <div class="col-xs-12 text-center">
+                                <h3>Payment Information</h3>
+                                <hr class="paymentHr">
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Name on Card</label>
+                                <input class='form-control' type='text' name="nameOnCard" id="nameOnCard">
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label' for="cardNumber">Card Number</label>
+                                <input class='form-control' type='text' name="cardNumber" id="cardNumber">
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-6 form-group required'>
+                                <label class='control-label' for="expirationMonth">Expiration Month</label>
+                                <input class='form-control' type='text' name="expirationMonth" id="expirationMonth" placeholder="MM">
+                            </div>
+                            <div class="col-xs-6 form-group required">
+                                <label for="expirationYear" class="control-label">Expiration Year</label>
+                                <input type="text" class="form-control" name="expirationYeard" id="expirationYear" placeholder="YYYY">
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label' for="securityCode">CVC</label>
+                                <input class='form-control' type='text' name="securityCode" id="securityCode">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xs-12">
+                                <label class="control-label">Type</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xs-12">
+                                <input type="radio" name="ccRadio" id="visa" value="visa">
+                                <img src="/assets/icons/visa.png" class="ccIcon">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xs-12">
+                                <input type="radio" name="ccRadio" id="mastercard" value="mastercard">
+                                <img src="/assets/icons/mastercard.png" class="ccIcon">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xs-12">
+                                <input type="radio" name="ccRadio" id="discover" value="discover">
+                                <img src="/assets/icons/discover.png" class="ccIcon">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-xs-12">
+                                <input type="radio" name=ccRadio id="amex" value="amex">
+                                <img src="/assets/icons/amex.png" class="ccIcon">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- container for reservation information -->
+                <div class="col-sm-6">
+                    <div class="row">
+                        <h3>Reservation Details</h3>
+                    </div>
+                </div>
         </div>
     </div>
+</form>
 
 
 
