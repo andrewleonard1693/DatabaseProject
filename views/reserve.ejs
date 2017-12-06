@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <form>
+    <form method="post" action="">
     <div class="outer-container">
         <div class="row reserveTitle">
             <div class="col-sm-12 text-center">
@@ -38,10 +38,10 @@
                         
                         </div>
                     </div>
-                    <div class="hotelInfo">
+                    <div class="paymentSection">
                         <div class="row paymentTitle">
-                            <div class="col-xs-12 text-center">
-                                <h3>Payment Information</h3>
+                            <div class="col-sm-12 text-center">
+                                <h3 id="paymentInfo">Payment Information</h3>
                                 <hr class="paymentHr">
                             </div>
                         </div>
@@ -106,8 +106,50 @@
                 </div>
                 <!-- container for reservation information -->
                 <div class="col-sm-6">
-                    <div class="row">
-                        <h3>Reservation Details</h3>
+                    <div class="reservationDetails">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h3>Details</h3>
+                                <hr class="paymentHr">
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-sm-12 form-group required'>
+                                <label class='control-label' for="roomType">Select Room Type</label>
+                                <select class="form-control" name="roomType" id="roomType">
+                                    <option value="Single King">Single King</option>
+                                    <option value="Double King">Double King</option>
+                                    <option value="Single Queen">Single Queen</option>
+                                    <option value="Double Queen">Double Queen</option>
+                                    <option value="Double Standard">Double Standard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-sm-12 form-group required'>
+                                <label class='control-label' for="breakfastType">Add Breakfast</label>
+                                <select class="form-control" name="breakfastType" id="breakfastType">
+                                    <option value="None">None</option>
+                                    <option value="American">American</option>
+                                    <option value="English">English</option>
+                                    <option value="Continental">Continental</option>
+                                    <option value="French">French</option>
+                                    <option value="Italian"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                                <div class='col-sm-12 form-group required'>
+                                    <label class='control-label' for="serviceType">Add Service</label>
+                                    <select class="form-control" name="serviceType" id="serviceType">
+                                        <option value="None">None</option>
+                                        <option value="Parking">Parking</option>
+                                        <option value="Airport Shuttle">Airport Shuttle</option>
+                                        <option value="Laundry">Laundry</option>
+                                        <option value="Massage">Massage</option>
+                                    </select>
+                                </div>
+                            </div>
                     </div>
                 </div>
         </div>
