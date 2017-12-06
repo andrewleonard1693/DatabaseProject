@@ -13,7 +13,6 @@ var mysql       	= 	require('mysql'),
     server        =   require('http').Server(app),
     io            =   require('socket.io')(server);
 
-    app.io = io;
 
 
 // //===========MYSQL CONNECTION===========    
@@ -45,7 +44,6 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 //set the view engine to ejs
 app.set('view engine','ejs');
-app.set('socketio',io);
 //allow the express app to render the static files in the public folder
 app.use(express.static('public'));
 app.use(session({

@@ -129,6 +129,9 @@ $(function(){
       });
 
     });
+    socket.on('alert',function(returnedData){
+        console.log("alert receieved")
+    })
     //testing successful connection of socket.io
     // socket.on('testConnection',function(returnedData){
     //     console.log(returnedData);

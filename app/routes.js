@@ -4,6 +4,8 @@ module.exports = function(app, passport,io,connection) {
         // =====================================
         // HOME PAGE (with login links) ========
         // =====================================
+        var addedReservation = false;
+        app.io = io;
         app.get('/', function(req, res) {
             res.render('homepage');
             //{ message: req.flash('signupMessage') }); // load the index.ejs file
@@ -87,10 +89,15 @@ module.exports = function(app, passport,io,connection) {
                 hotelTitle: "My Reservations",
                 user: req.params.username,
                 searchRoute: "/profile/"+req.params.username+"/search"
-            }
-        );
-            io.emit('alert');
-        })
+            });
+            io.on('connection',function(socket){
+                if(addedReservation){
+                    socket.emit('reservationAdded');
+                    addedReservation=false;
+                }
+            });
+        });
+            
         
         //route to render all of the hotels with the user searched state
         app.get("/profile/:username/:state",function(req,res){
@@ -185,6 +192,7 @@ module.exports = function(app, passport,io,connection) {
         app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //render the myreservations page
             //emit an event to fire an alert
+            addedReservation=true;
             res.redirect("/profile/"+req.params.username+"/myreservations");
         })
         

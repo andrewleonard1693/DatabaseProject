@@ -1,10 +1,91 @@
-<%- include partials/header.ejs %>
 
 
+<!DOCTYPE>
+<html>
+<head>
+	<title>Hotel Application</title>
+	<!-- roboto font -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<!-- our own css styles -->
+	<link rel="stylesheet" href="/css/myreservations.css">
+	<!-- bootstrap css cdn-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<!-- font awesome cdn -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- slick carousel cdn -->
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.2.0/css/iziToast.min.css">
+    <!-- sweet alert -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.0.7/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.0.7/dist/sweetalert2.all.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+        <div id="wrapper" class="toggled">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="<%=originalUrl%>" id="profile"> <%=JSON.stringify(user).replace(/['"]+/g, '')%> </a>
+                    </li>
+                    <li>
+                        <a href="<%=myReservations%>" id="myReservations">My Reservations</a>
+                    </li>
+                    <li>
+                        <a href="<%=myReviews%>" id="myReviews">My Reviews</a>
+                    </li>
+                    <li>
+                        <a href="/logout" id="signOut">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+    
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row text-center">
+                        <div class="col-lg-12">
+                            <div id = "searchField">
+                                <form method="post" action='<%=searchRoute%>'>
+                                    <input type="text" name="state" class="biginput" id="searchBar">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 id="hotelName"> <%= hotelTitle %> </h1>                                
+                        </div>
+                    </div>
+                    <!--content for dynamic content goes here -->
+                    <div class="outerContainer">
 
+                     <!-- Dynamic content here -->
 
-
-
-
-
-<%- include partials/footer.ejs %>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+    
+        </div>
+<!-- end modal code -->
+	<!-- jquery and bootstrap cdns -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<!-- slick carousel js cdn -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/js/iziModal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.2.0/js/iziToast.min.js"></script>
+    <script src="/js/jquery.autocomplete.min.js"></script>
+    <script src="/js/typed.min.js"></script>
+	<!-- our own js scripts file -->
+    <script src="/js/myreservations.js"></script>
+</body>
+</html>
