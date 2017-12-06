@@ -198,6 +198,7 @@
     margin: 0 auto;
     margin-top: 1%;
     box-shadow: 1px 3px 3px #AAAAAA;
+    position: relative;
   }
 
   .hotelImage {
@@ -208,7 +209,7 @@
   
   .hotelButton {
     width:100%;
-    margin-top:15%;
+    margin-top:12%;
     
   }
   .hotelBoldInfo {
