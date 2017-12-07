@@ -10,6 +10,7 @@ socket.on('invalidLogin',function(data){
       }).then((result) => {
         if (result.value) {
             $('#signInButton').trigger('click');
+            $('#signin').trigger('click');
         }
       })
 })
