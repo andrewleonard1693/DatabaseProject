@@ -16,19 +16,31 @@ module.exports = function(app, passport,io,connection) {
         // =====================================
 
         // process the login form
-        app.post('/login', passport.authenticate('local-login', {
-                successRedirect : '/profile', // redirect to the secure profile section
-                failureRedirect : '/', // redirect back to the signup page if there is an error
-                failureFlash : true // allow flash messages
-            }),function(req, res) {
-                if (req.body.remember) {
-                    req.session.cookie.maxAge = 1000 * 60 * 3;
-                } else {
-                    req.session.cookie.expires = false;
+        // app.post('/login', passport.authenticate('local-login', {
+        //         successRedirect : '/profile', // redirect to the secure profile section
+        //         failureRedirect : '/', // redirect back to the signup page if there is an error
+        //         failureFlash : true // allow flash messages
+        //     }),function(req, res) {
+        //         if (req.body.remember) {
+        //             req.session.cookie.maxAge = 1000 * 60 * 3;
+        //         } else {
+        //             req.session.cookie.expires = false;
+        //         }
+        //         res.redirect('/');
+        // });
+        app.post('/login', function(req,res,next){
+            passport.authenticate('local-login',function(err,user,info){
+                if(err){
+                    return next(err);
                 }
-                res.redirect('/');
-        });
-    
+                if (!user) { return res.redirect('/'); }
+
+                req.logIn(user,function(err){
+                    if(err){ return next(err); }
+                    return res.redirect('/profile/' + user.username);
+                });
+              })(req, res, next);
+            });
         // =====================================
         // SIGNUP ==============================
         // =====================================
