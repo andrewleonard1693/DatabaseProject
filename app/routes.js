@@ -5,9 +5,16 @@ module.exports = function(app, passport,io,connection) {
         // HOME PAGE (with login links) ========
         // =====================================
         var addedReservation = false;
+        var invalidLogin = false;
         app.io = io;
         app.get('/', function(req, res) {
             res.render('homepage');
+            io.on('connection',function(socket){
+                if(invalidLogin){
+                    socket.emit('invalidLogin');
+                    invalidLogin=false;
+                }
+            })
             //{ message: req.flash('signupMessage') }); // load the index.ejs file
         });
     
@@ -33,7 +40,12 @@ module.exports = function(app, passport,io,connection) {
                 if(err){
                     return next(err);
                 }
-                if (!user) { return res.redirect('/'); }
+                if (!user) 
+                { 
+                    invalidLogin = true;
+                    return res.redirect('/'); 
+                }
+
 
                 req.logIn(user,function(err){
                     if(err){ return next(err); }

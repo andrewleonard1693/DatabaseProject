@@ -14,6 +14,11 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
+	<!-- sweet alert -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.0.7/dist/sweetalert2.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.0.7/dist/sweetalert2.all.min.js"></script>
+	<!-- socketio -->
+	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-toggleable-md  navbar-fixed-top">
@@ -26,7 +31,7 @@
 		  <ul class="navbar-nav mr-auto">
 		  </ul>
 		  <form class="form-inline my-2 my-lg-0">
-			<button class="btn btn-outline-success my-2 my-sm-0 trigger-custom" data-izimodal-open="#modal-custom" type="submit">Sign In / Up</button>
+			<button class="btn btn-outline-success my-2 my-sm-0 trigger-custom" data-izimodal-open="#modal-custom" type="submit" id="signInButton">Sign In / Up</button>
 		  </form>
 		</div>
 	  </nav>

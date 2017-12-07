@@ -1,4 +1,18 @@
 console.log("Successfully connected");
+var socket=io({transports: ['websocket']});
+socket.on('invalidLogin',function(data){
+    // swal ( "Oops" ,  "Your username and/or password was incorrect!" ,  "error" )
+    swal({
+        title: 'Oops!',
+        text: 'Your username and/or password was incorrect!',
+        type: 'error',
+        confirmButtonText: 'Got it'
+      }).then((result) => {
+        if (result.value) {
+            $('#signInButton').trigger('click');
+        }
+      })
+})
 //reload the window when the brand logo is clicked
 $("#brand-variane").click(function(){
     window.location.reload();
