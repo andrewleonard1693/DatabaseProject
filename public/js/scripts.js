@@ -1,7 +1,6 @@
 console.log("Successfully connected");
 var socket=io({transports: ['websocket']});
 socket.on('invalidLogin',function(data){
-    // swal ( "Oops" ,  "Your username and/or password was incorrect!" ,  "error" )
     swal({
         title: 'Oops!',
         text: 'Your username and/or password was incorrect!',
