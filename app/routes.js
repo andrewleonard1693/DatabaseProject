@@ -195,21 +195,40 @@ module.exports = function(app, passport,io,connection) {
         // })
         app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //grab values inputted by the user
-            var nameOnCard  = req.body.nameOnCard,
-            cardNumner      = req.body.cardNumber,
-            expirationMonth = req.body.expirationMonth,
-            expirationYear  = req.body.expirationYear,
-            securityCode    = req.body.securityCode,
-            selectedCardType= req.body.ccRadio,
-            roomType        = req.body.roomType,
-            duration        = req.body.datefilter,
-            breakfastType   = req.body.breakfastType,
-            serviceType     = req.body.serviceType;
+            var nameOnCard      = req.body.nameOnCard,
+                cardNumner      = req.body.cardNumber,
+                expirationMonth = req.body.expirationMonth,
+                expirationYear  = req.body.expirationYear,
+                securityCode    = req.body.securityCode,
+                cardType        = req.body.ccRadio,
+                roomType        = req.body.roomType,
+                duration        = req.body.datefilter,
+                breakfastType   = req.body.breakfastType,
+                serviceType     = req.body.serviceType;
+            //grab the username and hotel Id from the url parameters
+            var username = req.params.username;
+            var hotelId = req.params.hotelId;
             
             //split the duration into start date and end date
-            var startDate = duration.split("/")[0].trim();
-            var endDate = duration.split("/")[1].trim();
+            var startDate   = duration.split("/")[0].trim();
+            var endDate     = duration.split("/")[1].trim();
+            //determine number of days betweeen  date range
+            var oneDay = 24*60*60*1000;
+            var firstDate = new Date(startDate);
+            var secondDate = new Date(endDate);
+            var numberOfDays = (Math.round(Math.abs(firstDate.getTime()-secondDate.getTime())/(oneDay)));
             
+            //check if the user already has a reservation with overlapping dates
+            var checkRooms = "select * from OfferRoom where OfferRoom.type=?"
+            connection.query(checkRooms,[roomType],function(err,rows){
+                if(err){
+                    console.log(err);
+                    return;
+                }else{
+                    console.log(rows);
+                }
+            })
+
 
 
             //perform sql logic to insert a reservation into the db
