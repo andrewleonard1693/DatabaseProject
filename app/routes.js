@@ -193,6 +193,28 @@ module.exports = function(app, passport,io,connection) {
         //         //TODO:
         //     })
         // })
+        app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
+            //grab values inputted by the user
+            var nameOnCard  = req.body.nameOnCard,
+            cardNumner      = req.body.cardNumber,
+            expirationMonth = req.body.expirationMonth,
+            expirationYear  = req.body.expirationYear,
+            securityCode    = req.body.securityCode,
+            selectedCardType= req.body.ccRadio,
+            roomType        = req.body.roomType,
+            duration        = req.body.datefilter,
+            breakfastType   = req.body.breakfastType,
+            serviceType     = req.body.serviceType;
+            
+            //split the duration into start date and end date
+            var startDate = duration.split("/")[0].trim();
+            var endDate = duration.split("/")[1].trim();
+            
+
+
+            //perform sql logic to insert a reservation into the db
+
+        })
 
         //route to show the user his/her room reviews
         app.get("/profile/:username/myroomreviews",function(req,res){

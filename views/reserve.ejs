@@ -81,21 +81,23 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-3">
-                                <input type="radio" class="typeRadio" name="ccRadio" id="visa" value="visa">
-                                <img src="/assets/icons/visa.png" class="ccIcon">
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="radio" class="typeRadio" name="ccRadio" id="mastercard" value="mastercard">
-                                <img src="/assets/icons/mastercard.png" class="ccIcon">
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="radio" class="typeRadio" name="ccRadio" id="discover" value="discover">
-                                <img src="/assets/icons/discover.png" class="ccIcon">
-                            </div>
-                            <div class="col-xs-3">
-                                <input type="radio" class="typeRadio" name=ccRadio id="amex" value="amex">
-                                <img src="/assets/icons/amex.png" class="ccIcon">
+                            <div class="btn-group">
+                                <div class="col-xs-3" id="buttonGroup">
+                                    <input type="radio" class="typeRadio" name="ccRadio" id="visa" value="visa">
+                                    <img src="/assets/icons/visa.png" class="ccIcon">
+                                </div>
+                                <div class="col-xs-3">
+                                    <input type="radio" class="typeRadio" name="ccRadio" id="mastercard" value="mastercard">
+                                    <img src="/assets/icons/mastercard.png" class="ccIcon">
+                                </div>
+                                <div class="col-xs-3">
+                                    <input type="radio" class="typeRadio" name="ccRadio" id="discover" value="discover">
+                                    <img src="/assets/icons/discover.png" class="ccIcon">
+                                </div>
+                                <div class="col-xs-3">
+                                    <input type="radio" class="typeRadio" name=ccRadio id="amex" value="amex">
+                                    <img src="/assets/icons/amex.png" class="ccIcon">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -141,8 +143,8 @@
                             </div>
                         </div>
                         <div class='form-row'>
-                                <div class='col-sm-12 form-group required'>
-                                    <label class='control-label' for="serviceType">Add Service</label>
+                                <div class='col-sm-12 form-group required' id="serviceForm">
+                                    <label class='control-label' for="serviceType">Add Service</label>                                
                                     <select class="form-control" name="serviceType" id="serviceType">
                                         <option value="None">None</option>
                                         <option value="Parking">Parking</option>
@@ -150,6 +152,8 @@
                                         <option value="Laundry">Laundry</option>
                                         <option value="Massage">Massage</option>
                                     </select>
+                                    <!-- <i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i> -->
+                                    
                                 </div>
                             </div>
                     </div>
