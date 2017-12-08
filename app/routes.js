@@ -60,6 +60,9 @@ module.exports = function(app, passport,io) {
         app.get('/reserveHotel', function(req, res) {
             res.render('reservation');
         });
+        app.get('/profile/writereview',function(req,res){
+            res.render('writereview');
+        })
         // =====================================
         // LOGOUT ==============================
         // =====================================
