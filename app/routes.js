@@ -240,7 +240,7 @@ module.exports = function(app, passport,io,connection) {
                 else{
                     var breakfastPrice = rows[3][0].bprice;
                     var servicePrice = rows[2][0].sCost;
-                    totalPrice = rows[0][0].price+breakfastPrice+servicePrice;
+                    totalPrice = (rows[0][0].price*numberOfDays)+breakfastPrice+servicePrice;
                     customerID = rows[1][0].cid;
 
                     var checkRooms = "select Room.Room_no, Room.Floor_no, Room.Capacity, Room.Type, Room.Description, Room.Price, Room.Hotel_ID, OfferRoom.Discount, OfferRoom.StartDate, OfferRoom.EndDate from Room left join OfferRoom on Room.Hotel_ID=OfferRoom.Hotel_ID and Room.Room_no=OfferRoom.Room_no where Room.Type=? and Room.Hotel_ID=?;"
