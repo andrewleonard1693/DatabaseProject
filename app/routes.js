@@ -170,8 +170,6 @@ module.exports = function(app, passport,io,connection) {
                 }
                 else{
                     var hotel = rows[0];
-                    console.log(hotel.imagePath)
-                    console.log(hotel);
                     res.render('reserve',
                     {   
                         //TODO:
@@ -218,44 +216,113 @@ module.exports = function(app, passport,io,connection) {
             var firstDate = new Date(startDate);
             var secondDate = new Date(endDate);
             var numberOfDays = (Math.round(Math.abs(firstDate.getTime()-secondDate.getTime())/(oneDay)));
+            var totalPrice = 0;
+            var customerID = 0;
 
-            //TODO:
-            //check if the user's inputted credit card exists in the db
-            //if it does then dont do anything
-            //else add the credit card that the user used to make the reservation
-            //check if the user already has a reservation with overlapping dates
-            var checkRooms = "select Room.Room_no, Room.Floor_no, Room.Capacity, Room.Type, Room.Description, Room.Price, Room.Hotel_ID, OfferRoom.Discount, OfferRoom.StartDate, OfferRoom.EndDate from Room left join OfferRoom on Room.Hotel_ID=OfferRoom.Hotel_ID and Room.Room_no=OfferRoom.Room_no where Room.Type=? and Room.Hotel_ID=?;"
-            connection.query(checkRooms,[roomType,req.params.hotelId],function(err,rows){
-                if(err){
-                    console.log(err);
-                    return;
-                }else if(rows.length==0){
-                    //handle error here where there are no rooms left 
-                    console.log("There are no rooms of that type for your selected hotel");
-                }else {
-                    //there are rooms available so we check that the user's new reservation doesnt conflict with a reservation they have already made
-                    var hotelRoom = rows[0];
-                    
-                    var checkConflictingReservation = ""
-                    //insert reservation into db
-                    var insertReservation = "insert into RoomReservation values(?,?,?,?,?);";
-                    var variables = [hotelRoom.Room_no,req.params.hotelId,endDate,startDate,numberOfDays];
-                    connection.query(insertReservation,variables,function(err,rows){
+            connection.query("select Room.price from Room where Room.Type=?;select Customer.cid from Customer where Customer.username=?;select Service.sCost from Service where Service.sType=?;select Breakfast.bprice from Breakfast where Breakfast.bType=?;",[roomType,req.params.username,serviceType,breakfastType],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    var breakfastPrice = rows[3][0].bprice;
+                    var servicePrice = rows[2][0].sCost;
+                    totalPrice = rows[0][0].price+breakfastPrice+servicePrice;
+                    customerID = rows[1][0].cid;
+
+                    var checkRooms = "select Room.Room_no, Room.Floor_no, Room.Capacity, Room.Type, Room.Description, Room.Price, Room.Hotel_ID, OfferRoom.Discount, OfferRoom.StartDate, OfferRoom.EndDate from Room left join OfferRoom on Room.Hotel_ID=OfferRoom.Hotel_ID and Room.Room_no=OfferRoom.Room_no where Room.Type=? and Room.Hotel_ID=?;"
+                    connection.query(checkRooms,[roomType,req.params.hotelId],function(err,rows){
                         if(err){
                             console.log(err);
-                        }else{
-                            //rows is the returned inserted tuple
-                            var insertedReservation = rows;
-                            //check if the user added a breakfast service
-                            if(breakfastType!="None"&&serviceType!="None"){
-                                var breakfastQuery = "insert into ReservationBreakfast values(?,?,?)";
-                                connection.query(breakfastQuery,[req.params.hotelId, insertedReservation.invoiceNo, breakfastType],function(err,rows){
-                                    if(err){
-                                        console.log(err);
-                                    }else{
-                                        console.log("breakfast reservation inserted");
+                            return;
+                        }else if(rows.length==0){
+                            //handle error here where there are no rooms left 
+                            console.log("There are no rooms of that type for your selected hotel");
+                        }else {
+                            //there are rooms available so we check that the user's new reservation doesnt conflict with a reservation they have already made
+                            var hotelRoom = rows[0];
+                            
+                            var checkConflictingReservation = ""
+                            //insert reservation into db
+                            var insertReservation = "insert into RoomReservation(Room_no,Hotel_ID,outDate,inDate,numDays) values(?,?,?,?,?);";
+                            var variables = [hotelRoom.Room_no,req.params.hotelId,endDate,startDate,numberOfDays];
+                            connection.query(insertReservation,variables,function(err,rows){
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    //rows is the returned inserted tuple
+                                    var insertedReservation = rows[0];
+                                    var rowInsertID = rows.insertId;
+                                    //check if the user added a breakfast service
+                                    if(breakfastType!="None"&&serviceType!="None"){
+                                        var breakfastQuery = "insert into ReservationBreakfast values(?,?,?)";
+                                        connection.query(breakfastQuery,[req.params.hotelId, rowInsertID, breakfastType],function(err,rows){
+                                            if(err){
+                                                console.log(err);
+                                            }else{
+                                                console.log("breakfast reservation inserted");
+                                                var serviceQuery = "insert into ReservationServices values(?,?,?);"
+                                                connection.query(serviceQuery,[rowInsertID,req.params.hotelId,serviceType],function(err,rows){
+                                                    if(err){
+                                                        console.log(err);
+                                                    }else{
+                                                        console.log("service reservation inserted");
+                                                        var creditCardQuery = "select * from Credit_Card c where c.Cnumber=? and c.ExpMonth=? and c.ExpYear=? and c.Name=? and c.BillingAddr=? and c.SecCode=? and c.Type=?;";
+                                                        connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
+                                                            if(err){
+                                                                console.log(err);
+                                                            }else if(rows.length==0){
+                                                                //add the credit card here
+                                                                var insertCC="insert into Credit_Card values (?,?,?,?,?,?,?)";
+                                                                connection.query(insertCC,[cardNumber,billingAddress,nameOnCard,securityCode,cardType,expirationMonth,expirationYear],function(err,rows){
+                                                                    if(err){console.log(err)}
+                                                                    else{
+                                                                         var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
+                                                                        connection.query(insertIntoReservationTable,[rowInsertID,totalPrice,customerID,cardNumber,startDate,endDate],function(err,rows){
+                                                                            if(err){
+                                                                                console.log(err);
+                                                                            }else{
+                                                                                console.log("reservation table updated");
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                })
+                                                            }
+                                                        });
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }else if(breakfastType!="None"){
+                                        var breakfastQuery = "insert into ReservationBreakfast values(?,?,?)";
+                                        connection.query(breakfastQuery,[req.params.hotelId, rowInsertID, breakfastType],function(err,rows){
+                                            if(err){
+                                                console.log(err);
+                                            }else{
+                                                var creditCardQuery = "select * from Credit_Card c where c.Cnumber=? and c.ExpMonth=? and c.ExpYear=? and c.Name=? and c.BillingAddr=? and c.SecCode=? and c.Type=?;";
+                                                connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
+                                                    if(err){
+                                                        console.log(err);
+                                                    }else if(rows.length==0){
+                                                        //add the credit card here
+                                                        var insertCC="insert into Credit_Card values (?,?,?,?,?,?,?)";
+                                                        connection.query(insertCC,[cardNumber,billingAddress,nameOnCard,securityCode,cardType,expirationMonth,expirationYear],function(err,rows){
+                                                            if(err){console.log(err)}
+                                                            else{
+                                                                 var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
+                                                                connection.query(insertIntoReservationTable,[rowInsertID,totalPrice,customerID,cardNumber,startDate,endDate],function(err,rows){
+                                                                    if(err){
+                                                                        console.log(err);
+                                                                    }else{
+                                                                        console.log("reservation table updated");
+                                                                    }
+                                                                })
+                                                            }
+                                                        })
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }else if(serviceType!="None"){
                                         var serviceQuery = "insert into ReservationServices values(?,?,?);"
-                                        connection.query(serviceQuery,[insertedReservation.invoiceNo,req.params.hotelId,serviceType],function(err,rows){
+                                        connection.query(serviceQuery,[rowInsertID,req.params.hotelId,serviceType],function(err,rows){
                                             if(err){
                                                 console.log(err);
                                             }else{
@@ -264,14 +331,14 @@ module.exports = function(app, passport,io,connection) {
                                                 connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
                                                     if(err){
                                                         console.log(err);
-                                                    }else if(rows.length!=0){
+                                                    }else if(rows.length==0){
                                                         //add the credit card here
                                                         var insertCC="insert into Credit_Card values (?,?,?,?,?,?,?)";
                                                         connection.query(insertCC,[cardNumber,billingAddress,nameOnCard,securityCode,cardType,expirationMonth,expirationYear],function(err,rows){
                                                             if(err){console.log(err)}
                                                             else{
                                                                  var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
-                                                                connection.query(insertIntoReservationTable,[insertedReservation.invoiceNo,],function(err,rows){
+                                                                connection.query(insertIntoReservationTable,[rowInsertID,totalPrice,customerID,cardNumber,startDate,endDate],function(err,rows){
                                                                     if(err){
                                                                         console.log(err);
                                                                     }else{
@@ -285,74 +352,17 @@ module.exports = function(app, passport,io,connection) {
                                             }
                                         })
                                     }
-                                })
-                            }else if(breakfastType!="None"){
-                                var breakfastQuery = "insert into ReservationBreakfast values(?,?,?)";
-                                connection.query(breakfastQuery,[req.params.hotelId, insertedReservation.invoiceNo, breakfastType],function(err,rows){
-                                    if(err){
-                                        console.log(err);
-                                    }else{
-                                        var creditCardQuery = "select * from Credit_Card c where c.Cnumber=? and c.ExpMonth=? and c.ExpYear=? and c.Name=? and c.BillingAddr=? and c.SecCode=? and c.Type=?;";
-                                        connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
-                                            if(err){
-                                                console.log(err);
-                                            }else if(rows.length!=0){
-                                                //add the credit card here
-                                                var insertCC="insert into Credit_Card values (?,?,?,?,?,?,?)";
-                                                connection.query(insertCC,[cardNumber,billingAddress,nameOnCard,securityCode,cardType,expirationMonth,expirationYear],function(err,rows){
-                                                    if(err){console.log(err)}
-                                                    else{
-                                                         var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
-                                                        connection.query(insertIntoReservationTable,[insertedReservation.invoiceNo,],function(err,rows){
-                                                            if(err){
-                                                                console.log(err);
-                                                            }else{
-                                                                console.log("reservation table updated");
-                                                            }
-                                                        })
-                                                    }
-                                                })
-                                            }
-                                        });
-                                    }
-                                });
-                            }else if(serviceType!="None"){
-                                var serviceQuery = "insert into ReservationServices values(?,?,?);"
-                                connection.query(serviceQuery,[insertedReservation.invoiceNo,req.params.hotelId,serviceType],function(err,rows){
-                                    if(err){
-                                        console.log(err);
-                                    }else{
-                                        console.log("service reservation inserted");
-                                        var creditCardQuery = "select * from Credit_Card c where c.Cnumber=? and c.ExpMonth=? and c.ExpYear=? and c.Name=? and c.BillingAddr=? and c.SecCode=? and c.Type=?;";
-                                        connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
-                                            if(err){
-                                                console.log(err);
-                                            }else if(rows.length!=0){
-                                                //add the credit card here
-                                                var insertCC="insert into Credit_Card values (?,?,?,?,?,?,?)";
-                                                connection.query(insertCC,[cardNumber,billingAddress,nameOnCard,securityCode,cardType,expirationMonth,expirationYear],function(err,rows){
-                                                    if(err){console.log(err)}
-                                                    else{
-                                                         var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
-                                                        connection.query(insertIntoReservationTable,[insertedReservation.invoiceNo,],function(err,rows){
-                                                            if(err){
-                                                                console.log(err);
-                                                            }else{
-                                                                console.log("reservation table updated");
-                                                            }
-                                                        })
-                                                    }
-                                                })
-                                            }
-                                        });
-                                    }
-                                })
-                            }
+                                }
+                            })
+                            
                         }
                     })
-                    
+
+
+
                 }
             })
+
 
 
 
@@ -361,7 +371,7 @@ module.exports = function(app, passport,io,connection) {
         })
 
         // var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
-            // connection.query(insertIntoReservationTable,[insertedReservation.invoiceNo,],function(err,rows){
+            // connection.query(insertIntoReservationTable,[rowInsertID,],function(err,rows){
             //     if(err){
             //         console.log(err);
             //     }else{
