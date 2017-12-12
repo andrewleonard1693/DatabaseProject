@@ -75,13 +75,19 @@
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <img src="<%=reservation.imagePath%>" class="hotelImage" alt="">
                                         </div>
+                                        
                                         <div class="col-sm-12 col-md-6 col-lg-6">
                                             <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=reservation.Hotel_Id%></h2>
                                             <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> <%=reservation.Street%></h5>
                                             <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> <%=reservation.City%></h5>
                                             <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> <%=reservation.State%></h5>
                                             <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> <%=reservation.Country%></h5>
-                                            <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> <%=reservation.Phone%></h5>
+                                            <h5 id="reservationRoomNumber"><span class="hotelBoldInfo"> Room #:</span> <%=reservation.Room_no%></h5>
+                                            <h5 id="reservationInvoiceNumber"><span class="hotelBoldInfo"> Invoice #:</span> <%=reservation.invoiceNo%></h5>
+                                            <h5 id="reservationCheckIn"><span class="hotelBoldInfo"> Check-In:</span> <%=new Date(reservation.inDate).toUTCString().split(' ').slice(0,4).join(' ')%></h5>
+                                            <h5 id="reservationCheckOut"><span class="hotelBoldInfo"> Check-Out:</span> <%=new Date(reservation.outDate).toUTCString().split(' ').slice(0,4).join(' ')%></h5>
+                                            <h5 id="reservationPrice"><span class="hotelBoldInfo"> Price:</span> $<%=reservation.totalAmount%></h5>
+
                                             <!-- <div class="row">
 
                                             </div> -->
