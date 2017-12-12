@@ -217,6 +217,14 @@ module.exports = function(app, passport,io,connection) {
             var firstDate = new Date(startDate);
             var secondDate = new Date(endDate);
             var numberOfDays = (Math.round(Math.abs(firstDate.getTime()-secondDate.getTime())/(oneDay)));
+
+            //TODO:
+            //check if the user's inputted credit card exists in the db
+            //if it does then dont do anything
+            //else add the credit card that the user used to make the reservation
+
+
+
             
             //check if the user already has a reservation with overlapping dates
             var checkRooms = "select Room.Room_no, Room.Floor_no, Room.Capacity, Room.Type, Room.Description, Room.Price, Room.Hotel_ID, OfferRoom.Discount, OfferRoom.StartDate, OfferRoom.EndDate from Room left join OfferRoom on Room.Hotel_ID=OfferRoom.Hotel_ID and Room.Room_no=OfferRoom.Room_no where Room.Type=? and Room.Hotel_ID=?;"
@@ -230,8 +238,48 @@ module.exports = function(app, passport,io,connection) {
                 }else {
                     //there are rooms available so we check that the user's new reservation doesnt conflict with a reservation they have already made
                     var hotelRoom = rows[0];
+                    
                     var checkConflictingReservation = ""
                     //insert reservation into db
+                    var insertReservation = "insert into RoomReservation values(?,?,?,?,?);";
+                    var variables = [hotelRoom.Room_no,req.params.hotelId,endDate,startDate,numberOfDays];
+                    connection.query(insertReservation,variables,function(err,rows){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            //rows is the returned inserted tuple
+                            var insertedReservation = rows;
+                            //check if the user added a breakfast service
+                            if(breakfastType!="None"){
+                                var breakfastQuery = "insert into ReservationBreakfast values(?,?,?)";
+                                connection.query(breakfastQuery,[req.params.hotelId, insertedReservation.invoiceNo, breakfastType],function(err,rows){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        console.log("breakfast reservation inserted");
+                                    }
+                                })
+                            }
+                            if(serviceType!="None"){
+                                var serviceQuery = "insert into ReservationServices values(?,?,?);"
+                                connection.query(serviceQuery,[insertedReservation.invoiceNo,req.params.hotelId,serviceType],function(err,rows){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        console.log("service reservation inserted");
+                                    }
+                                })
+                            }
+                            var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
+                            connection.query(insertIntoReservationTable,[insertedReservation.invoiceNo,],function(err,rows){
+                                if(err){
+                                    console.log(err);
+                                }else{
+                                    console.log("reservation table updated");
+                                }
+                            })
+                        }
+                    })
                     
                 }
             })
