@@ -200,13 +200,6 @@ module.exports = function(app, passport,io,connection) {
                 username: req.params.username,
             })
         })
-        //route to show the user his/her reservations
-        // app.get("/profile/:username/myreservations",function(req,res){
-        //     res.render('myreservations'
-        //     {
-        //         //TODO:
-        //     })
-        // })
         app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //grab values inputted by the user
             var nameOnCard      = req.body.nameOnCard,
