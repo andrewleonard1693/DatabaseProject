@@ -105,19 +105,35 @@ module.exports = function(app, passport,io,connection) {
             //TODO: perform query logic to find the current user's reservations and pass them back to the view
             //NOTE: remember to add an edit and delete button to the user's reservation with text inputs set to not editable
             //at first and a delete button with maybe a prompt saying are you sure
-            res.render('myreservations',
-            {
-                originalUrl: "/profile/"+req.params.username,
-                myReservations: "/profile/"+req.params.username+"/myreservations",
-                myReviews: "/profile/"+req.params.username+"/myreviews",
-                hotelTitle: "My Reservations",
-                user: req.params.username,
-                searchRoute: "/profile/"+req.params.username+"/search"
-            });
+            //get the reservation information
+            var userHasReservations = false;
+            var getUsersReservations = "select h.Hotel_Id, h.imagePath, l.Street, l.City, l.State, l.Country, l.ZIP, p.Phone, r.Room_no, r.invoiceNo, r.inDate, r.outDate, res.totalAmount from Hotel h left join Location l on h.Hotel_Id=l.Hotel_Id left join Phones p on p.Hotel.Hotel_Id left join RoomReservation r on r.Hotel_ID=p.Hotel_Id, Reservation res, Customer c where res.invoiceNo=r.invoiceNo and c.username=?;"
+            connection.query(getUsersReservations,[req.params.username],function(err,rows){
+                if(err){console.log(err);}
+                else{
+                    if(rows.length>0){
+                        userHasReservations=true;  
+                    }
+                    var reservations = rows[0];
+                    res.render('myreservations',
+                    {
+                        originalUrl: "/profile/"+req.params.username,
+                        myReservations: "/profile/"+req.params.username+"/myreservations",
+                        myReviews: "/profile/"+req.params.username+"/myreviews",
+                        hotelTitle: "My Reservations",
+                        user: req.params.username,
+                        searchRoute: "/profile/"+req.params.username+"/search",
+                        reservations: reservations
+                    });
+                }
+            })
             io.on('connection',function(socket){
                 if(addedReservation){
                     socket.emit('reservationAdded');
                     addedReservation=false;
+                }
+                if(!userHasReservations){
+                    socket.emit('userHasNoReservations');
                 }
             });
         });
@@ -280,6 +296,8 @@ module.exports = function(app, passport,io,connection) {
                                                                                 console.log(err);
                                                                             }else{
                                                                                 console.log("reservation table updated");
+                                                                                addedReservation=true;
+                                                                                res.redirect("/profile/"+req.params.username+"/myreservations");
                                                                             }
                                                                         })
                                                                     }
@@ -312,6 +330,8 @@ module.exports = function(app, passport,io,connection) {
                                                                         console.log(err);
                                                                     }else{
                                                                         console.log("reservation table updated");
+                                                                        addedReservation=true;
+                                                                        res.redirect("/profile/"+req.params.username+"/myreservations");
                                                                     }
                                                                 })
                                                             }
@@ -343,6 +363,8 @@ module.exports = function(app, passport,io,connection) {
                                                                         console.log(err);
                                                                     }else{
                                                                         console.log("reservation table updated");
+                                                                        addedReservation=true;
+                                                                        res.redirect("/profile/"+req.params.username+"/myreservations");
                                                                     }
                                                                 })
                                                             }
@@ -397,12 +419,6 @@ module.exports = function(app, passport,io,connection) {
         //route for the post of the search term for the states
         app.post("/profile/:username/search",function(req,res){
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
-        })
-        app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
-            //render the myreservations page
-            //emit an event to fire an alert
-            addedReservation=true;
-            res.redirect("/profile/"+req.params.username+"/myreservations");
         })
         
 

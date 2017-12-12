@@ -8,6 +8,9 @@ socket.on('reservationAdded',function(data){
         'success'
       )
 })
+socket.on('userHasNoReservations',function(data){
+    console.log("user has no reservations");
+})
 var typed = new Typed('#searchBar', {
     strings: [
         'Alabama',
