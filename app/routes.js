@@ -196,7 +196,7 @@ module.exports = function(app, passport,io,connection) {
         app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //grab values inputted by the user
             var nameOnCard      = req.body.nameOnCard,
-                cardNumner      = req.body.cardNumber,
+                cardNumber      = req.body.cardNumber,
                 expirationMonth = req.body.expirationMonth,
                 expirationYear  = req.body.expirationYear,
                 securityCode    = req.body.securityCode,
@@ -204,7 +204,8 @@ module.exports = function(app, passport,io,connection) {
                 roomType        = req.body.roomType,
                 duration        = req.body.datefilter,
                 breakfastType   = req.body.breakfastType,
-                serviceType     = req.body.serviceType;
+                serviceType     = req.body.serviceType,
+                billingAddress   = req.body.billingAddress;
             //grab the username and hotel Id from the url parameters
             var username = req.params.username;
             var hotelId = req.params.hotelId;
@@ -222,6 +223,15 @@ module.exports = function(app, passport,io,connection) {
             //check if the user's inputted credit card exists in the db
             //if it does then dont do anything
             //else add the credit card that the user used to make the reservation
+            var creditCardQuery = "select * from Credit_Card c where c.Cnumber=? and c.ExpMonth=? and c.ExpYear=? and c.Name=? and c.BillingAddr=? and c.SecCode=? and c.Type=?;";
+            connection.query(creditCardQuery,[cardNumber,expirationMonth,expirationYear,nameOnCard,billingAddress,securityCode,cardType],function(err,rows){
+                if(err){
+                    console.log(err);
+                }else if(rows.length!=0){
+                    //add the credit card here
+                    
+                }
+            });
 
 
 
