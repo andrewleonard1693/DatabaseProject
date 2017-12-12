@@ -87,6 +87,8 @@
                                             <h5 id="reservationCheckIn"><span class="hotelBoldInfo"> Check-In:</span> <%=new Date(reservation.inDate).toUTCString().split(' ').slice(0,4).join(' ')%></h5>
                                             <h5 id="reservationCheckOut"><span class="hotelBoldInfo"> Check-Out:</span> <%=new Date(reservation.outDate).toUTCString().split(' ').slice(0,4).join(' ')%></h5>
                                             <h5 id="reservationPrice"><span class="hotelBoldInfo"> Price:</span> $<%=reservation.totalAmount%></h5>
+                                            <h5 id="reservationBreakfast"><span class="hotelBoldInfo"> Breakfast: </span><%=reservation.bType%></h5>
+                                            <h5 id="reservationService"><span class="hotelBoldInfo"> Service: </span><%=reservation.sType%></h5>
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <a href="#"><button type="button" class="btn btn-primary hotelButton">Write Review</button></a>
