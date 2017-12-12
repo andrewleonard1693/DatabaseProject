@@ -219,13 +219,20 @@ module.exports = function(app, passport,io,connection) {
             var numberOfDays = (Math.round(Math.abs(firstDate.getTime()-secondDate.getTime())/(oneDay)));
             
             //check if the user already has a reservation with overlapping dates
-            var checkRooms = "select * from OfferRoom where OfferRoom.type=?"
-            connection.query(checkRooms,[roomType],function(err,rows){
+            var checkRooms = "select Room.Room_no, Room.Floor_no, Room.Capacity, Room.Type, Room.Description, Room.Price, Room.Hotel_ID, OfferRoom.Discount, OfferRoom.StartDate, OfferRoom.EndDate from Room left join OfferRoom on Room.Hotel_ID=OfferRoom.Hotel_ID and Room.Room_no=OfferRoom.Room_no where Room.Type=? and Room.Hotel_ID=?;"
+            connection.query(checkRooms,[roomType,req.params.hotelId],function(err,rows){
                 if(err){
                     console.log(err);
                     return;
-                }else{
-                    console.log(rows);
+                }else if(rows.length==0){
+                    //handle error here where there are no rooms left 
+                    console.log("There are no rooms of that type for your selected hotel");
+                }else {
+                    //there are rooms available so we check that the user's new reservation doesnt conflict with a reservation they have already made
+                    var hotelRoom = rows[0];
+                    var checkConflictingReservation = ""
+                    //insert reservation into db
+                    
                 }
             })
 
