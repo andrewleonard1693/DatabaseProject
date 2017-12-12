@@ -73,20 +73,18 @@
                             <div class="hotelContainer">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
+                                            <img src="<%=reservation.imagePath%>" class="hotelImage" alt="">
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=hotel.Hotel_Id%></h2>
-                                            <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> <%=hotel.Street%></h5>
-                                            <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> <%=hotel.City%></h5>
-                                            <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> <%=hotel.State%></h5>
-                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> <%=hotel.Country%></h5>
-                                            <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> <%=hotel.Phone%></h5>
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-6 col-lg-12">
-                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/<%=hotel.Hotel_Id%>/reserve"><button type="button" class="btn btn-primary hotelButton reserveHotelButton">Reserve</button></a>
-                                                </div>
-                                            </div>
+                                            <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=reservation.Hotel_Id%></h2>
+                                            <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> <%=reservation.Street%></h5>
+                                            <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> <%=reservation.City%></h5>
+                                            <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> <%=reservation.State%></h5>
+                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> <%=reservation.Country%></h5>
+                                            <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> <%=reservation.Phone%></h5>
+                                            <!-- <div class="row">
+
+                                            </div> -->
                                         </div>
                                     </div> 
                                 </div>
