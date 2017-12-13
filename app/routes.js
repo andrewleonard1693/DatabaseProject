@@ -1,3 +1,5 @@
+
+
 // app/routes.js
 module.exports = function(app, passport,io,connection) {
     
@@ -169,7 +171,7 @@ module.exports = function(app, passport,io,connection) {
             })
 
         //route for the write a review page
-        app.get("/profile/:username/:hotelId/writeReview",function(req,res){
+        app.get("/profile/:username/:hotelId/:roomNo/writeReview",function(req,res){
             //render the review page and pass in all the relevant information about the hotel
             var types = [];
             var query = "select s.sType from Reservation r left join ReservationServices s on r.InvoiceNo=s.invoiceNo, Customer c where c.username=? and c.cid=r.cid;"
@@ -189,13 +191,88 @@ module.exports = function(app, passport,io,connection) {
                                 res.render('review',
                                 {
                                     reviewTypes: types,
-                                    postRoute:"/profile/"+req.params.username+"/"+req.params.hotelId+"/writeReview"
+                                    postRoute:"/profile/"+req.params.username+"/"+req.params.hotelId+"/"+req.params.roomNo+"/writeReview"
                                 })
                             }
                         })
                 }
             })
         });
+        app.post("/profile/:username/:hotelId/:roomNo/writeReview",function(req,res){
+            //implement logic to add a review to the database
+            var reviewType = req.body.roomType;
+            var rating = req.body.star;
+            if(typeof(rating)=='undefined'){
+                rating=0;
+            }
+            var comment = req.body.comment;
+            var query = null;
+            var parameters = [];
+            var cid = null;
+            var hotelId=req.params.hotelId;
+            var roomNo = req.params.roomNo;
+            //get the cid of the username
+            var getCID = "select c.cid from Customer c where c.username=?";
+            //GET CID
+            connection.query(getCID,[req.params.username],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    cid = rows[0].cid;
+                    //check for type of review
+                    if(reviewType=="Room Review"){
+                        query = "insert into RoomReview(rate,Hotel_ID,comment,Room_no,cid) values(?,?,?,?,?)";
+
+                        connection.query(query,[rating,hotelId,comment,roomNo,cid],function(err,rows){
+                            if(err){console.log(err);}
+                            else{
+                                res.redirect('myreviews');
+                            }
+                        })
+                    }else if(reviewType=="Service Review"){
+                        query = "insert into ServiceReview(rate,comment,cid,sType,Hotel_ID) values(?,?,?,?,?)";
+                        // get the type of service ordered by the current user
+                        var serviceType = "select s.sType from Reservation r, ReservationServices s where r.cid=? and r.InvoiceNo=s.invoiceNo";
+                        connection.query(serviceType,[cid],function(err,rows){
+                            if(err){console.log(err)}
+                            else{
+                                var sType = rows[0].sType;
+                                connection.query(query,[rating,comment,cid,sType,hotelId],function(err,rows){
+                                    if(err){console.log(err)}
+                                    else{
+                                        res.redirect('myreviews');
+                                    }
+
+                                })
+                            }
+                        });
+                    }else{
+                        //review type is a Breakfast Review
+                        query = "insert into BreakfastReview(rate,comment,cid,bType,Hotel_ID) values(?,?,?,?,?);"
+                        //get the type of breakfast
+                        var getTypeOfBreakfast = "select b.bType from Reservation r, ReservationBreakfast b where r.cid=? and r.InvoiceNo=b.invoiceNo;"
+                        connection.query(getTypeOfBreakfast,[cid],function(err,rows){
+                            if(err){console.log(err)}
+                            else{
+                                var bType = rows[0].bType;
+                                connection.query(query,[rating,comment,cid,bType,hotelId],function(err,rows){
+                                    if(err){console.log(err)}
+                                    else{
+                                        res.redirect('myreviews');
+                                    }
+                                })
+                            }
+                        })
+                    }
+                }
+
+            })
+
+
+            console.log("post route hit");
+        })
+        app.get("/profile/:username/:hotelId/:roomNo/myreviews",function(req,res){
+            res.render("myreviews");
+        })
 
 
           //route for the reserve hotel page
