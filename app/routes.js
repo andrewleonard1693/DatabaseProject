@@ -233,7 +233,7 @@ module.exports = function(app, passport,io,connection) {
                         connection.query(query,[rating,hotelId,comment,roomNo,cid],function(err,rows){
                             if(err){console.log(err);}
                             else{
-                                res.redirect('myroomreviews');
+                                res.redirect('/profile/'+req.params.username+'/myroomreviews/reviews');
                             }
                         })
                     }else if(reviewType=="Service Review"){
@@ -247,9 +247,8 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,sType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('myservicereviews');
+                                        res.redirect('/profile/'+req.params.username+'/myservicereviews/reviews');
                                     }
-
                                 })
                             }
                         });
@@ -265,7 +264,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,bType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('mybreakfastreviews');
+                                        res.redirect('/profile/'+req.params.username+'/mybreakfastreviews/reviews');
                                     }
                                 })
                             }
@@ -277,16 +276,96 @@ module.exports = function(app, passport,io,connection) {
             console.log("post route hit");
         })
         app.get("/profile/:username/myroomreviews/reviews",function(req,res){
-            res.render('homepage');
-            console.log("hit route");
+            //query the database for the cid of the user
+            var getCID = "select c.cid from Customer c where c.username=?";
+            connection.query(getCID,[req.params.username],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    var cid = rows[0].cid;
+                    //query the database for the reviews
+                    var query = "select r.rate, r.comment, r.Room_no, h.imagePath, l.Street, l.City, l.State, l.Country, p.Phone from RoomReview r left join Customer c on c.cid=r.cid lefHotel h on r.Hotel_ID=h.Hotel_ID left join Location l on h.Hotel_ID=l.Hotel_ID  left join Phones p on p.Hotel_ID = l.Hotel_ID where r.cid=?;"
+                    connection.query(query,[cid],function(err,rows){
+                        if(err){console.log(err)}
+                        else{
+                            var reviews = rows;
+                            res.render('myroomreviews',
+                            {
+                                originalUrl: "/profile/"+req.params.username,
+                                myReservations: "/profile/"+req.params.username+"/myreservations",
+                                myReviews: "/profile/"+req.params.username+"/myreviews",
+                                hotelTitle: "My Room Reviews",
+                                user: req.params.username,
+                                searchRoute: "/profile/"+req.params.username+"/search",
+                                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                reviews: reviews
+                            })
+                        }
+                    })
+                }
+            })
         })
         app.get("/profile/:username/mybreakfastreviews/reviews",function(req,res){
             // res.render("mybreakfastreviews");
+            var getCID = "select c.cid from Customer c where c.username=?";
+            connection.query(getCID,[req.params.username],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    var cid = rows[0].cid;
+                    var query = "select r.rate, r.comment, r.bType, h.imagePath, l.Street, l.City, l.State, l.Country, p.Phone from BreakfastReview r join Customer c on c.cid=r.cid left join Hotel h on r.Hotel_ID=h.Hotel_ID left join Location l on h.Hotel_ID=l.Hotel_ID  left join Phones p on p.Hotel_ID = l.Hotel_ID where r.cid=?";
+                    connection.query(query,[cid],function(err,rows){
+                        if(err){console.log(err)}
+                        else{
+                            var reviews = rows;
+                            res.render('mybreakfastreviews',
+                            {
+                                originalUrl: "/profile/"+req.params.username,
+                                myReservations: "/profile/"+req.params.username+"/myreservations",
+                                myReviews: "/profile/"+req.params.username+"/myreviews",
+                                hotelTitle: "My Room Reviews",
+                                user: req.params.username,
+                                searchRoute: "/profile/"+req.params.username+"/search",
+                                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                reviews: reviews
+                            })
+                        }
+                    })
+                }
+            });
             console.log("get route hit")
         })
         app.get("/profile/:username/myservicereviews/reviews",function(req,res){
             // res.render("myservicereviews");
-            console.log("get route hit")
+            var getCID = "select c.cid from Customer c where c.username=?";
+            connection.query(getCID,[req.params.username],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    var cid = rows[0].cid;
+                    var query = "select r.rate, r.comment, r.sType, h.imagePath, l.Street, l.City, l.State, l.Country, p.Phone from ServiceReview r join Customer c on c.cid=r.cid left join Hotel h on r.Hotel_ID=h.Hotel_ID left join Location l on h.Hotel_ID=l.Hotel_ID  left join Phones p on p.Hotel_ID = l.Hotel_ID where r.cid=?;"
+                    connection.query(query,[cid],function(err,rows){
+                        if(err){console.log(err)}
+                        else{
+                            var reviews = rows;
+                            res.render('myservicereviews',
+                            {
+                                originalUrl: "/profile/"+req.params.username,
+                                myReservations: "/profile/"+req.params.username+"/myreservations",
+                                myReviews: "/profile/"+req.params.username+"/myreviews",
+                                hotelTitle: "My Room Reviews",
+                                user: req.params.username,
+                                searchRoute: "/profile/"+req.params.username+"/search",
+                                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                reviews: reviews
+                            })
+                        }
+                    })
+                }
+            });
         })
 
 
