@@ -283,7 +283,7 @@ module.exports = function(app, passport,io,connection) {
                 else{
                     var cid = rows[0].cid;
                     //query the database for the reviews
-                    var query = "select r.rate, r.comment, r.Room_no, h.imagePath, l.Street, l.City, l.State, l.Country, p.Phone from RoomReview r left join Customer c on c.cid=r.cid lefHotel h on r.Hotel_ID=h.Hotel_ID left join Location l on h.Hotel_ID=l.Hotel_ID  left join Phones p on p.Hotel_ID = l.Hotel_ID where r.cid=?;"
+                    var query = "select r.rate, r.comment, r.Room_no, h.imagePath, l.Street, l.City, l.State, l.Country, p.Phone from RoomReview r left join Customer c on c.cid=r.cid left join Hotel h on r.Hotel_ID=h.Hotel_ID left join Location l on h.Hotel_ID=l.Hotel_ID  left join Phones p on p.Hotel_ID = l.Hotel_ID where r.cid=?;"
                     connection.query(query,[cid],function(err,rows){
                         if(err){console.log(err)}
                         else{

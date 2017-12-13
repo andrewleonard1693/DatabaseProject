@@ -7,7 +7,7 @@
 	<!-- roboto font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<!-- our own css styles -->
-	<link rel="stylesheet" href="/css/myrromreviews.css">
+	<link rel="stylesheet" href="/css/myroomreviews.css">
 	<!-- bootstrap css cdn-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<!-- font awesome cdn -->
@@ -69,26 +69,28 @@
                     <div class="outerContainer">
 
                         <!-- Dynamic addition of hotels -->
-                        <% roomreviews.forEach(function(review){ %>
+                        <% reviews.forEach(function(review){ %>
                             <div class="hotelContainer">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
+                                            <img src="<%=review.imagePath%>" class="hotelImage" alt="">
                                         </div>
                                         <div class="col-sm-12 col-md-6 col-lg-6">
-                                            <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=hotel.Hotel_Id%></h2>
-                                            <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> <%=hotel.Street%></h5>
-                                            <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> <%=hotel.City%></h5>
-                                            <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> <%=hotel.State%></h5>
-                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> <%=hotel.Country%></h5>
-                                            <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> <%=hotel.Phone%></h5>
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-6 col-lg-12">
-                                                    <a href="/profile/<%=user%>/<%=hotel.State%>/<%=hotel.Hotel_Id%>/reserve"><button type="button" class="btn btn-primary hotelButton reserveHotelButton">Reserve</button></a>
+                                            <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID: </span> <%=review.Hotel_Id%></h2>
+                                            <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street: </span> <%=review.Street%></h5>
+                                            <h5 id="hotelCity"><span class="hotelBoldInfo"> City: </span> <%=review.City%></h5>
+                                            <h5 id="hotelState"><span class="hotelBoldInfo"> State: </span> <%=review.State%></h5>
+                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country: </span> <%=review.Country%></h5>
+                                            <h5 id="hotelCountry"><span class="hotelBoldInfo"> Phone: </span> <%=review.Country%></h5>
+                                            <h5 id="reservationRoomNumber"><span class="hotelBoldInfo"> Room #: </span> <%=review.Room_no%></h5>
+                                            <div class='form-row'>
+                                                <div class='col-xs-12'>
+                                                    <label class='control-label' for="comment">Your Comment</label>
+                                                    <textarea readonly class="form-control" rows="5" id="comment" name="comment"><%=review.comment%></textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                         <%});%>
 
