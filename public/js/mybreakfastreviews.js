@@ -1,5 +1,6 @@
 var socket=io({transports: ['websocket']});
 console.log("connected");
+
 socket.on('newBreakfastReview',function(data){
     console.log('reservation route hit')
     swal(

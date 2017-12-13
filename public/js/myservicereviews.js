@@ -1,15 +1,13 @@
 var socket=io({transports: ['websocket']});
 console.log("connected");
-socket.on('reservationAdded',function(data){
+
+socket.on('newServiceReview',function(data){
     console.log('reservation route hit')
     swal(
         'Success!',
-        'Your reservation is confirmed',
+        'Your service review is confirmed',
         'success'
       )
-})
-socket.on('userHasNoReservations',function(data){
-    console.log("user has no reservations");
 })
 var typed = new Typed('#searchBar', {
     strings: [
