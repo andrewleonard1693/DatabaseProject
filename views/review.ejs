@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Hotel Application</title>
+    <!-- jquery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- date range picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.min.css">
+    <!-- roboto font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- our own css styles -->
+    <link rel="stylesheet" href="/css/review.css">
+    <!-- bootstrap css cdn-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- slick carousel cdn -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izimodal/1.5.1/css/iziModal.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <form method="post" action="<%=postRoute%>">
+    <div class="outer-container">
+        <div class="row reserveTitle">
+            <div class="col-sm-12 text-center">
+                <h1>Write a Review</h1>
+                <hr class="titleHr">
+            </div>
+        </div>
+        <div class="row">
+            <!-- container for hotel information and payment information -->
+                <div class="col-sm-12">
+                    <div class="paymentSection">
+                        <div class="form-row">
+                            <div class="col-xs-12" id="selectDiv">
+                                <label class="control-label" for="reviewType">Review</label>
+                                <select class="form-control" name="roomType" id="roomType">
+                                    <option value="Room Review">Room Review</option>
+                                    <!-- Dynamic addition of review types -->
+                                    <% for(var i=0;i<reviewTypes.length;i++){ %>
+                                        <option value="<%=reviewTypes[i]%>"><%=reviewTypes[i]%></option>
+                                    <% }; %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label'>Rating</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="stars">
+                                    <form action="">
+                                    <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                    <label class="star star-5" for="star-5"></label>
+                                    <input class="star star-4" id="star-4" type="radio" name="star"/>
+                                    <label class="star star-4" for="star-4"></label>
+                                    <input class="star star-3" id="star-3" type="radio" name="star"/>
+                                    <label class="star star-3" for="star-3"></label>
+                                    <input class="star star-2" id="star-2" type="radio" name="star"/>
+                                    <label class="star star-2" for="star-2"></label>
+                                    <input class="star star-1" id="star-1" type="radio" name="star"/>
+                                    <label class="star star-1" for="star-1"></label>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='form-row'>
+                            <div class='col-xs-12 form-group required'>
+                                <label class='control-label' for="comment">Comment</label>
+                                <textarea class="form-control" rows="5" id="comment"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="submit" id="reserveButton"class="btn btn-success submitButton">Submit</button>
+                </div>
+        </div>
+    </div>
+</form>
+
+<script src="/js/review.js"></script>
+
+</body>
+</html>

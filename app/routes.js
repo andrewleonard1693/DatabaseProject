@@ -169,10 +169,35 @@ module.exports = function(app, passport,io,connection) {
             })
 
         //route for the write a review page
-        app.get("/profile/:username/:state/:hotelId/review",function(req,res){
+        app.get("/profile/:username/:hotelId/writeReview",function(req,res){
             //render the review page and pass in all the relevant information about the hotel
-            //TODO:
+            var types = [];
+            var query = "select s.sType from Reservation r left join ReservationServices s on r.InvoiceNo=s.invoiceNo, Customer c where c.username=? and c.cid=r.cid;"
+            connection.query(query,[req.params.username],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    if(rows.length>0){
+                        types.push("Service Review");
+                    }
+                        var breakfastQuery = "select b.bType from Reservation r left join ReservationBreakfast b on r.InvoiceNo=b.invoiceNo, Customer c where c.username=? and c.cid=r.cid;"
+                        connection.query(breakfastQuery,[req.params.username],function(err,rows){
+                            if(err){console.log(err);}
+                            else{
+                                if(rows.length>0){
+                                    types.push("Breakfast Review");
+                                }
+                                res.render('review',
+                                {
+                                    reviewTypes: types,
+                                    postRoute:"/profile/"+req.params.username+"/"+req.params.hotelId+"/writeReview"
+                                })
+                            }
+                        })
+                }
+            })
         });
+
+
           //route for the reserve hotel page
         app.get("/profile/:username/:state/:hotelId/reserve",function(req,res){
             //query the database for the 
@@ -374,7 +399,6 @@ module.exports = function(app, passport,io,connection) {
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
         })
         
-
         // =====================================
         // LOGOUT ==============================
         // =====================================
