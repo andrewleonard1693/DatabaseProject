@@ -95,9 +95,11 @@ module.exports = function(app, passport,io,connection) {
                 originalUrl: req.originalUrl,
                 hotelTitle: "All Hotels", // get the user out of session and pass to template
                 myReservations: req.originalUrl+"/myreservations",
-                myReviews: req.originalUrl+"/myreviews",
                 searchRoute: req.originalUrl+"/search", 
-                hotels: hotels
+                hotels: hotels,
+                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
             });
             })
         })
@@ -125,7 +127,10 @@ module.exports = function(app, passport,io,connection) {
                         hotelTitle: "My Reservations",
                         user: req.params.username,
                         searchRoute: "/profile/"+req.params.username+"/search",
-                        reservations: reservations
+                        reservations: reservations,
+                        myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                        myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                        myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
                     });
                 }
             })
@@ -160,7 +165,10 @@ module.exports = function(app, passport,io,connection) {
                             myReservations: "/profile/"+req.params.username+"/myreservations",
                             myReviews: "/profile/"+req.params.username+"/myreviews",
                             searchRoute: "/profile/"+req.params.username+"/search",
-                            hotels: hotels
+                            hotels: hotels,
+                            myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                            myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                            myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
                         })
                     }else{
                         //if the db doesnt return anything then just redirect to the main profile page
@@ -225,7 +233,7 @@ module.exports = function(app, passport,io,connection) {
                         connection.query(query,[rating,hotelId,comment,roomNo,cid],function(err,rows){
                             if(err){console.log(err);}
                             else{
-                                res.redirect('myRoomReviews');
+                                res.redirect('myroomreviews');
                             }
                         })
                     }else if(reviewType=="Service Review"){
@@ -239,7 +247,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,sType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('myServiceReviews');
+                                        res.redirect('myservicereviews');
                                     }
 
                                 })
@@ -257,7 +265,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,bType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('myBreakfastReviews');
+                                        res.redirect('mybreakfastreviews');
                                     }
                                 })
                             }
@@ -266,18 +274,19 @@ module.exports = function(app, passport,io,connection) {
                 }
 
             })
-
-
             console.log("post route hit");
         })
-        app.get("/profile/:username/:hotelId/:roomNo/myRoomReviews",function(req,res){
-            res.render("myRoomReviews");
+        app.get("/profile/:username/myroomreviews/reviews",function(req,res){
+            res.render('homepage');
+            console.log("hit route");
         })
-        app.get("/profile/:username/:hotelId/:roomNo/myBreakfastReviews",function(req,res){
-            res.render("myBreakfastReviews");
+        app.get("/profile/:username/mybreakfastreviews/reviews",function(req,res){
+            // res.render("mybreakfastreviews");
+            console.log("get route hit")
         })
-        app.get("/profile/:username/:hotelId/:roomNo/myServiceReviews",function(req,res){
-            res.render("myServiceReviews");
+        app.get("/profile/:username/myservicereviews/reviews",function(req,res){
+            // res.render("myservicereviews");
+            console.log("get route hit")
         })
 
 
