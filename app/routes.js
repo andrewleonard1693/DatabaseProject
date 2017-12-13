@@ -335,7 +335,7 @@ module.exports = function(app, passport,io,connection) {
                                 originalUrl: "/profile/"+req.params.username,
                                 myReservations: "/profile/"+req.params.username+"/myreservations",
                                 myReviews: "/profile/"+req.params.username+"/myreviews",
-                                hotelTitle: "My Room Reviews",
+                                hotelTitle: "My Breakfast Reviews",
                                 user: req.params.username,
                                 searchRoute: "/profile/"+req.params.username+"/search",
                                 myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
@@ -345,6 +345,7 @@ module.exports = function(app, passport,io,connection) {
                             })
                             io.on('connection',function(socket){
                                 if(addedBreakfastReview){
+                                    console.log("addedBreask")
                                     socket.emit('newBreakfastReview');
                                     addedBreakfastReview=false;
                                 }
