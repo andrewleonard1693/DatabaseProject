@@ -102,9 +102,26 @@ module.exports = function(app, passport,io,connection) {
                 hotels: hotels,
                 myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
-                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
+                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                statistics: "/profile/"+req.params.username+"/reservationstats"
             });
             })
+        })
+
+        app.get("/profile/:username/reservationstats",function(req,res){
+            console.log("hit reservation stats route");
+            res.render('statistics', {
+                user : req.params.username,
+                originalUrl: req.originalUrl,
+                hotelTitle: "Reservtion Statistics", // get the user out of session and pass to template
+                myReservations: "/profile/"+req.params.username+"/myreservations",
+                searchRoute: "/profile/"+req.params.username+"/search", 
+                // hotels: hotels,
+                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                statistics: "/profile/"+req.params.username+"/reservationstats"
+            });
         })
 
         //route to display the current user's reservations
@@ -133,7 +150,8 @@ module.exports = function(app, passport,io,connection) {
                         reservations: reservations,
                         myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                         myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
-                        myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
+                        myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                        statistics: "/profile/"+req.params.username+"/reservationstats"
                     });
                 }
             })
@@ -171,7 +189,8 @@ module.exports = function(app, passport,io,connection) {
                             hotels: hotels,
                             myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                             myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
-                            myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews"
+                            myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                            statistics: "/profile/"+req.params.username+"/reservationstats"
                         })
                     }else{
                         //if the db doesnt return anything then just redirect to the main profile page
@@ -305,6 +324,7 @@ module.exports = function(app, passport,io,connection) {
                                 myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                statistics: "/profile/"+req.params.username+"/reservationstats",
                                 reviews: reviews
                             })
                             io.on('connection',function(socket){
@@ -341,6 +361,7 @@ module.exports = function(app, passport,io,connection) {
                                 myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                statistics: "/profile/"+req.params.username+"/reservationstats",
                                 reviews: reviews
                             })
                             io.on('connection',function(socket){
@@ -379,6 +400,7 @@ module.exports = function(app, passport,io,connection) {
                                 myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                statistics: "/profile/"+req.params.username+"/reservationstats",
                                 reviews: reviews
                             })
                             io.on('connection',function(socket){
