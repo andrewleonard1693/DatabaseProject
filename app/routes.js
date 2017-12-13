@@ -225,7 +225,7 @@ module.exports = function(app, passport,io,connection) {
                         connection.query(query,[rating,hotelId,comment,roomNo,cid],function(err,rows){
                             if(err){console.log(err);}
                             else{
-                                res.redirect('myreviews');
+                                res.redirect('myRoomReviews');
                             }
                         })
                     }else if(reviewType=="Service Review"){
@@ -239,7 +239,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,sType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('myreviews');
+                                        res.redirect('myServiceReviews');
                                     }
 
                                 })
@@ -257,7 +257,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,bType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
-                                        res.redirect('myreviews');
+                                        res.redirect('myBreakfastReviews');
                                     }
                                 })
                             }
@@ -270,8 +270,14 @@ module.exports = function(app, passport,io,connection) {
 
             console.log("post route hit");
         })
-        app.get("/profile/:username/:hotelId/:roomNo/myreviews",function(req,res){
-            res.render("myreviews");
+        app.get("/profile/:username/:hotelId/:roomNo/myRoomReviews",function(req,res){
+            res.render("myRoomReviews");
+        })
+        app.get("/profile/:username/:hotelId/:roomNo/myBreakfastReviews",function(req,res){
+            res.render("myBreakfastReviews");
+        })
+        app.get("/profile/:username/:hotelId/:roomNo/myServiceReviews",function(req,res){
+            res.render("myServiceReviews");
         })
 
 
