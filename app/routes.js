@@ -8,6 +8,9 @@ module.exports = function(app, passport,io,connection) {
         // =====================================
         var addedReservation = false;
         var invalidLogin = false;
+        var addedRoomReview = false;
+        var addedBreakfastReview = false;
+        var addedServiceReview = false;
         app.io = io;
         app.get('/', function(req, res) {
             res.render('homepage');
@@ -233,6 +236,7 @@ module.exports = function(app, passport,io,connection) {
                         connection.query(query,[rating,hotelId,comment,roomNo,cid],function(err,rows){
                             if(err){console.log(err);}
                             else{
+                                addedRoomReview=true;
                                 res.redirect('/profile/'+req.params.username+'/myroomreviews/reviews');
                             }
                         })
@@ -247,6 +251,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,sType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
+                                        addedServiceReview=true;
                                         res.redirect('/profile/'+req.params.username+'/myservicereviews/reviews');
                                     }
                                 })
@@ -264,6 +269,7 @@ module.exports = function(app, passport,io,connection) {
                                 connection.query(query,[rating,comment,cid,bType,hotelId],function(err,rows){
                                     if(err){console.log(err)}
                                     else{
+                                        addedBreakfastReview=true;
                                         res.redirect('/profile/'+req.params.username+'/mybreakfastreviews/reviews');
                                     }
                                 })
@@ -301,6 +307,12 @@ module.exports = function(app, passport,io,connection) {
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
                                 reviews: reviews
                             })
+                            io.on('connection',function(socket){
+                                if(addedRoomReview){
+                                    socket.emit('newRoomReview');
+                                    addedRoomReview=false;
+                                }
+                            })
                         }
                     })
                 }
@@ -330,6 +342,12 @@ module.exports = function(app, passport,io,connection) {
                                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
                                 reviews: reviews
+                            })
+                            io.on('connection',function(socket){
+                                if(addedBreakfastReview){
+                                    socket.emit('newBreakfastReview');
+                                    addedBreakfastReview=false;
+                                }
                             })
                         }
                     })
@@ -361,6 +379,12 @@ module.exports = function(app, passport,io,connection) {
                                 myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
                                 reviews: reviews
+                            })
+                            io.on('connection',function(socket){
+                                if(addedServiceReview){
+                                    socket.emit('newServiceReview');
+                                    addedServiceReview=false;
+                                }
                             })
                         }
                     })

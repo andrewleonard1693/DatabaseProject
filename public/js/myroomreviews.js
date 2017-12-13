@@ -1,10 +1,9 @@
 var socket=io({transports: ['websocket']});
 console.log("connected");
-socket.on('reservationAdded',function(data){
-    console.log('reservation route hit')
+socket.on('newRoomReview',function(data){
     swal(
         'Success!',
-        'Your reservation is confirmed',
+        'Your room review is confirmed',
         'success'
       )
 })
