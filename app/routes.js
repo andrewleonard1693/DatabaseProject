@@ -188,16 +188,10 @@ module.exports = function(app, passport,io,connection) {
                     var hotel = rows[0];
                     res.render('reserve',
                     {   
-                        //TODO:
                         username: username,
                         hotel: hotel
                     }) 
                 }
-            })
-            res.render('reserve',
-            {   
-                //TODO:
-                username: req.params.username,
             })
         })
         app.post("/profile/:username/:state/:hotelId/reserve",function(req,res){
@@ -372,43 +366,9 @@ module.exports = function(app, passport,io,connection) {
                             
                         }
                     })
-
-
-
                 }
             })
-
-
-
-
-            //perform sql logic to insert a reservation into the db
-
         })
-
-        // var insertIntoReservationTable ="insert into Reservation values (?,?,?,?,?,?);"
-            // connection.query(insertIntoReservationTable,[rowInsertID,],function(err,rows){
-            //     if(err){
-            //         console.log(err);
-            //     }else{
-            //         console.log("reservation table updated");
-            //     }
-            // })
-
-        //route to show the user his/her room reviews
-        app.get("/profile/:username/myroomreviews",function(req,res){
-            //TODO:
-        })
-
-        //route to show the user his/her breakfast reviews
-        app.get("/profile/:username/mybreakfastreviews",function(req,res){
-            //TODO:
-        })
-
-        //route to show the user his/her service reviews
-        app.get("/profile/:username/myservicereviews",function(req,res){
-            //TODO:
-        })
-
         //route for the post of the search term for the states
         app.post("/profile/:username/search",function(req,res){
             res.redirect("/profile/"+req.params.username+"/"+req.body.state);
