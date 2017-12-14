@@ -222,3 +222,6 @@ body {
   /* .hotelInformation {
 
   } */
+  li {
+    list-style-type: none;
+  }

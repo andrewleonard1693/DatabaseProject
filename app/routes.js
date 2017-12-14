@@ -193,7 +193,8 @@ module.exports = function(app, passport,io,connection) {
                                                     statistics: "/profile/"+req.params.username+"/reservationstats",
                                                     highestRatedBreakfast: breakfastType,
                                                     highestRatedService: serviceType,
-                                                    previousDateInput: duration
+                                                    previousDateInput: duration,
+                                                    customers: topPayingCustomers
                                                 });
                                                 
                                             }

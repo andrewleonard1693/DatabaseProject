@@ -92,6 +92,18 @@
                             <label class='control-label' for="comment">Highest Rated Service: <%=highestRatedService%></label>
                         </div>
                     </div>
+                    <div class="row">
+                            <div class="col-xs-12">
+                                <h5>Top 5 Paying Customers</h5>
+                            </div>
+                    </div>
+                    <% customers.forEach(function(customer,i){ %>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <li id="customer"><span class="hotelBoldInfo"><%=i+1%> -</span> <%=customer.username%></li>
+                            </div>
+                        </div> 
+                    <%});%>
                     <div class="outerContainer">
                     <!-- Dynamic addition of hotels -->
                                     <% hotels.forEach(function(hotel){ %>
