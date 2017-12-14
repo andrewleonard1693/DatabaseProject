@@ -215,6 +215,10 @@ body {
   .hotelBoldInfo {
     font-weight: bold;
   }
+  .applyDateButton {
+    margin-top:2%;
+    width:100%;
+  }
   /* .hotelInformation {
 
   } */

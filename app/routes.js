@@ -113,7 +113,7 @@ module.exports = function(app, passport,io,connection) {
             res.render('statistics', {
                 user : req.params.username,
                 originalUrl: req.originalUrl,
-                hotelTitle: "Reservtion Statistics", // get the user out of session and pass to template
+                hotelTitle: "Reservation Statistics", // get the user out of session and pass to template
                 myReservations: "/profile/"+req.params.username+"/myreservations",
                 searchRoute: "/profile/"+req.params.username+"/search", 
                 // hotels: hotels,
@@ -122,6 +122,49 @@ module.exports = function(app, passport,io,connection) {
                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
                 statistics: "/profile/"+req.params.username+"/reservationstats"
             });
+        })
+        app.post("/profile/:username/reservationstats",function(req,res){
+            var duration = req.body.datefilter;
+            //split the duration into start date and end date
+            var startDate   = duration.split("/")[0].trim();
+            var endDate     = duration.split("/")[1].trim();
+            //determine number of days betweeen  date range
+            var oneDay = 24*60*60*1000;
+            var firstDate = new Date(startDate);
+            var secondDate = new Date(endDate);
+            var numberOfDays = (Math.round(Math.abs(firstDate.getTime()-secondDate.getTime())/(oneDay)));
+
+            //get the highest rated breakfast
+            var breakfastType = "None";
+            var serviceType = "None";
+            var topPayingCustomers = null;
+            var breakfastQuery = "select b.bType, b.rate from Reservation r left join BreakfastReview b on r.cid=b.cid where r.ReservationStartDate >=? and r.ReservationEndDate<=? and b.bType IS NOT NULL ORDER BY b.rate DESC limit 1;";
+            connection.query(breakfastQuery,[startDate,endDate],function(err,rows){
+                if(err){console.log(err)}
+                else{
+                    if(rows.length>0){
+                        breakfastType = rows[0].bType;
+                    }
+                    //get the highest rated service
+                    var serviceQuery ="select s.sType, s.rate from Reservation r left join ServiceReview s on r.cid=s.cid where r.ReservationStartDate >=? and r.ReservationEndDate<=? and s.sType IS NOT NULL ORDER BY s.rate DESC limit 1;"
+                    connection.query(serviceQuery,[startDate,endDate],function(err,rows){
+                        if(err){console.log(err)}
+                        else{
+                            if(rows.length>0){
+                                serviceType = rows[0].sType;
+                            }
+                            var topCustomers = "select DISTINCT r.TotalAmount, c.username from Reservation r left join Customer c on c.cid=r.cid where r.TotalAmount IS NOT NULL ORDER BY r.TotalAmount DESC limit 5;"
+                            connection.query(topCustomers,function(err,rows){
+                                if(err){console.log(err)}
+                                else{
+                                    topPayingCustomers = rows;
+                                    var getHighestRatedRoom = "";
+                                }
+                            })
+                        }
+                    })
+                }
+            })
         })
 
         //route to display the current user's reservations
