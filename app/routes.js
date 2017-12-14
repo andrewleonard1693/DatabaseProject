@@ -183,7 +183,7 @@ module.exports = function(app, passport,io,connection) {
                                                 {
                                                     originalUrl: "/profile/"+req.params.username,
                                                     myReservations: "/profile/"+req.params.username+"/myreservations",
-                                                    hotelTitle: "My Reservations",
+                                                    hotelTitle: "Reservation Statistics",
                                                     user: req.params.username,
                                                     searchRoute: "/profile/"+req.params.username+"/search",
                                                     hotels: hotels,
