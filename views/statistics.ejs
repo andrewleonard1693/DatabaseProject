@@ -84,12 +84,12 @@
                     </div>
                     <div class='form-row'>
                         <div class='col-xs-12'>
-                            <label class='control-label' for="comment">Highest Rated Breakfast:</label>
+                            <label class='control-label' for="comment">Highest Rated Breakfast: <%=highestRatedBreakfast%></label>
                         </div>
                     </div>
                     <div class='form-row'>
                         <div class='col-xs-12'>
-                            <label class='control-label' for="comment">Highest Rated Service:</label>
+                            <label class='control-label' for="comment">Highest Rated Service: <%=highestRatedService%></label>
                         </div>
                     </div>
                     <div class="outerContainer">
@@ -99,14 +99,21 @@
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <img src="<img_91.jpg>" class="hotelImage" alt="">
                                     </div>
-                                    <div class="col-sm-12 col-md-6 col-lg-6">
-                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> 69</h2>
-                                        <h5 id="hotelStreet"><span class="hotelBoldInfo"> Street:</span> Geeb Street</h5>
-                                        <h5 id="hotelCity"><span class="hotelBoldInfo"> City:</span> New Brunswick</h5>
-                                        <h5 id="hotelState"><span class="hotelBoldInfo"> State:</span> New Jersey</h5>
-                                        <h5 id="hotelCountry"><span class="hotelBoldInfo"> Country:</span> United States</h5>
-                                        <h5 id="hotelPhone"><span class="hotelBoldInfo"> Phone #:</span> 1800GEEBS</h5>
-                                    </div>
+
+                                    <% hotels.forEach(function(hotel){ %>
+                                        <div class="hotelContainer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                                        <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=hotel.Hotel_Id%></h2>
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> Rating:</span> <%=hotel.rate%></h2>
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> Highest Rated Room Type:</span> <%=hotel.type%></h2>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                    <%});%>
                                 </div> 
                             </div>
                     </div>

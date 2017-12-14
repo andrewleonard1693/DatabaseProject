@@ -137,6 +137,7 @@ module.exports = function(app, passport,io,connection) {
             //get the highest rated breakfast
             var breakfastType = "None";
             var serviceType = "None";
+            var hotels = null;
             var topPayingCustomers = null;
             var breakfastQuery = "select b.bType, b.rate from Reservation r left join BreakfastReview b on r.cid=b.cid where r.ReservationStartDate >=? and r.ReservationEndDate<=? and b.bType IS NOT NULL ORDER BY b.rate DESC limit 1;";
             connection.query(breakfastQuery,[startDate,endDate],function(err,rows){
@@ -158,7 +159,29 @@ module.exports = function(app, passport,io,connection) {
                                 if(err){console.log(err)}
                                 else{
                                     topPayingCustomers = rows;
-                                    var getHighestRatedRoom = "";
+                                    var getHighestTypeOfRoomPerHotel = "select DISTINCT r.Hotel_ID, r.rate, ro.type from RoomReview r, Room ro where r.Hotel_ID=ro.Hotel_ID and r.rate in(select max(r.rate) from RoomReview r group by r.hotel_ID) GROUP BY r.Hotel_ID;";
+                                    connection.query(getHighestTypeOfRoomPerHotel,function(err,rows){
+                                        if(err){console.log(err)}
+                                        else{
+                                            if(rows.length>0){
+                                                hotels = rows;
+                                                res.render('statistics',
+                                                {
+                                                    originalUrl: "/profile/"+req.params.username,
+                                                    myReservations: "/profile/"+req.params.username+"/myreservations",
+                                                    hotelTitle: "My Reservations",
+                                                    user: req.params.username,
+                                                    searchRoute: "/profile/"+req.params.username+"/search",
+                                                    hotels: hotels,
+                                                    myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                                                    myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                                                    myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                                                    statistics: "/profile/"+req.params.username+"/reservationstats"
+                                                });
+                                                
+                                            }
+                                        }
+                                    })
                                 }
                             })
                         }
