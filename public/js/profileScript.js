@@ -1,5 +1,13 @@
 //socket io setup
 var socket=io({transports: ['websocket']});
+socket.on("userIsNotAdmin",function(data){
+    swal({
+        title: 'Oops!',
+        text: "You cant view that page unless you are an administrator!",
+        type: 'error',
+        confirmButtonText: 'Got it!'
+      })
+})
 var typed = new Typed('#searchBar', {
     strings: [
         'Alabama',

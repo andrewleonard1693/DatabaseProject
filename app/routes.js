@@ -12,6 +12,7 @@ module.exports = function(app, passport,io,connection) {
         var addedBreakfastReview = false;
         var addedServiceReview = false;
         app.io = io;
+        var userIsNotAdmin = false;
         app.get('/', function(req, res) {
             res.render('homepage');
             io.on('connection',function(socket){
@@ -105,23 +106,36 @@ module.exports = function(app, passport,io,connection) {
                 myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
                 statistics: "/profile/"+req.params.username+"/reservationstats"
             });
+            io.on('connection',function(socket){
+                if(userIsNotAdmin){
+                    socket.emit("userIsNotAdmin");
+                    userIsNotAdmin=false;
+                }
+            })
             })
         })
 
         app.get("/profile/:username/reservationstats",function(req,res){
             console.log("hit reservation stats route");
-            res.render('statistics', {
-                user : req.params.username,
-                originalUrl: req.originalUrl,
-                hotelTitle: "Reservation Statistics", // get the user out of session and pass to template
-                myReservations: "/profile/"+req.params.username+"/myreservations",
-                searchRoute: "/profile/"+req.params.username+"/search", 
-                // hotels: hotels,
-                myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
-                myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
-                myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
-                statistics: "/profile/"+req.params.username+"/reservationstats"
-            });
+                console.log("socket connected");
+                if(req.params.username!="admin"&& req.params.username!="Admin"){
+                    res.redirect("/profile/"+req.params.username);
+                    userIsNotAdmin = true;
+                }else{
+                    res.render('statistics', {
+                        user : req.params.username,
+                        originalUrl: req.originalUrl,
+                        hotelTitle: "Reservation Statistics", // get the user out of session and pass to template
+                        myReservations: "/profile/"+req.params.username+"/myreservations",
+                        searchRoute: "/profile/"+req.params.username+"/search", 
+                        // hotels: hotels,
+                        myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
+                        myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
+                        myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
+                        statistics: "/profile/"+req.params.username+"/reservationstats"
+                    });
+                }
+
         })
         app.post("/profile/:username/reservationstats",function(req,res){
             var duration = req.body.datefilter;
