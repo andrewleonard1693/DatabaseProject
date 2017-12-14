@@ -159,13 +159,13 @@ module.exports = function(app, passport,io,connection) {
                                 if(err){console.log(err)}
                                 else{
                                     topPayingCustomers = rows;
-                                    var getHighestTypeOfRoomPerHotel = "select DISTINCT r.Hotel_ID, r.rate, ro.type from RoomReview r, Room ro where r.Hotel_ID=ro.Hotel_ID and r.rate in(select max(r.rate) from RoomReview r group by r.hotel_ID) GROUP BY r.Hotel_ID;";
+                                    var getHighestTypeOfRoomPerHotel = "select DISTINCT r.Hotel_ID, r.rate, h.imagePath, ro.type from RoomReview r, Hotel h, Room ro where r.Hotel_ID=ro.Hotel_ID and r.rate in(select max(r.rate) from RoomReview r group by r.hotel_ID) GROUP BY r.Hotel_ID;";
                                     connection.query(getHighestTypeOfRoomPerHotel,function(err,rows){
                                         if(err){console.log(err)}
                                         else{
                                             if(rows.length>0){
                                                 hotels = rows;
-                                                res.render('statistics',
+                                                res.render('reviewstats',
                                                 {
                                                     originalUrl: "/profile/"+req.params.username,
                                                     myReservations: "/profile/"+req.params.username+"/myreservations",
@@ -176,7 +176,10 @@ module.exports = function(app, passport,io,connection) {
                                                     myRoomReviews: "/profile/"+req.params.username+"/myroomreviews/reviews",
                                                     myBreakfastReviews: "/profile/"+req.params.username+"/mybreakfastreviews/reviews",
                                                     myServiceReviews: "/profile/"+req.params.username+"/myservicereviews/reviews",
-                                                    statistics: "/profile/"+req.params.username+"/reservationstats"
+                                                    statistics: "/profile/"+req.params.username+"/reservationstats",
+                                                    highestRatedBreakfast: breakfastType,
+                                                    highestRatedService: serviceType,
+                                                    previousDateInput: duration
                                                 });
                                                 
                                             }

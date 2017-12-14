@@ -7,7 +7,7 @@
 	<!-- roboto font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<!-- our own css styles -->
-    <link rel="stylesheet" href="/css/statistics.css">
+    <link rel="stylesheet" href="/css/reviewstats.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- date range picker -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -77,24 +77,39 @@
                         <form action="<%=statistics%>" method="post">
                             <div class="col-sm-12 form-group required">
                                 <label for="datefilter" class="control-label">Time Period</label>
-                                <input class="form-control" type="text" name="datefilter"/>
+                                <input class="form-control" type="text" name="datefilter" value="<%=previousDateInput%>"/>
                                 <button type="submit" id="applyDateButton"class="btn btn-success applyDateButton">Submit</button>
                             </div>
                         </form>
                     </div>
                     <div class='form-row'>
                         <div class='col-xs-12'>
-                            <label class='control-label' for="comment">Highest Rated Breakfast:</label>
+                            <label class='control-label' for="comment">Highest Rated Breakfast: <%=highestRatedBreakfast%></label>
                         </div>
                     </div>
                     <div class='form-row'>
                         <div class='col-xs-12'>
-                            <label class='control-label' for="comment">Highest Rated Service:</label>
+                            <label class='control-label' for="comment">Highest Rated Service: <%=highestRatedService%></label>
                         </div>
                     </div>
                     <div class="outerContainer">
                     <!-- Dynamic addition of hotels -->
-                      
+                                    <% hotels.forEach(function(hotel){ %>
+                                        <div class="hotelContainer">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                                        <img src="<%=hotel.imagePath%>" class="hotelImage" alt="">
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> ID:</span> <%=hotel.Hotel_ID%></h2>
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> Rating:</span> <%=hotel.rate%></h2>
+                                                        <h2 id="hotelNumber"><span class="hotelBoldInfo"> Highest Rated Room Type:</span> <%=hotel.type%></h2>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                    <%});%>
+                                </div> 
+                            </div>
                     </div>
                 </div>
             </div>
@@ -112,6 +127,6 @@
     <script src="/js/jquery.autocomplete.min.js"></script>
     <script src="/js/typed.min.js"></script>
 	<!-- our own js scripts file -->
-	<script src="/js/statistics.js"></script>
+	<script src="/js/reviewstats.js"></script>
 </body>
 </html>
